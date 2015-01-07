@@ -1,0 +1,34 @@
+<nav class="navbar navbar-default">
+	<div class="navbar-header">
+		<div class="navbar-brand">SokiSoki</div>
+	</div>
+</nav>
+<div class="main-content with-header">
+	<div class="page-container">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<button type="button" class="btn btn-primary" ng-click="signOut()">Sign out</button>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<button type="button" class="btn btn-default" ng-click="scan()">Scan a barcode</button>
+				<div>{{ scannedBarcode }}</div>
+			</div>
+		</div>
+		<button type="button" class="btn btn-default" ng-click="showInfo()">Info</button>
+	</div>
+
+	<div class="page-container popup" ng-show="showInfoPanel">
+		<aside class="popup-content panel panel-default">
+			<div class="panel-heading">
+				Version <span app-version></span>
+			</div>
+			<div class="panel-body text-center">
+				<p class="lead">Created by Outlandish & Chromatrope</p>
+				<p>&copy; {{ copyright | date:'yyyy' }}</p>
+				<button class="btn btn-default" ng-click="hideInfo()">Close</button>
+			</div>
+		</aside>
+	</div>
+</div>

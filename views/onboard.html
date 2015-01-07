@@ -1,0 +1,17 @@
+<div class="main-content">
+	<div class="page-container onboard">
+		<carousel interval="0" class="carousel">
+			<slide class="slide" ng-repeat="slide in slides">
+				<div class="disc">
+					<span class="fa fa-{{slide.icon}}"></span>
+				</div>
+				<h3>{{ slide.title }}</h3>
+				<p>{{ slide.text }}</p>
+			</slide>
+		</carousel>
+		<div class="anchor-bottom">
+			<button type="button" class="btn btn-lrg btn-block btn-got-it" ng-click="finished()">Ok, I've got it.</button>
+		</div>
+	</div>
+</div>
+
