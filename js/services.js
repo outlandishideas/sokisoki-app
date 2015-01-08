@@ -52,7 +52,7 @@ angular.module('sokisoki')
 		return service;
 	})
 
-	.factory('ssUserAuth', ['ssDb', function(ssDb) {
+	.factory('ssUserAuth', ['$q', 'ssDb', '$location', function($q, ssDb, $location) {
 		var service = {};
 
 		service.hasOnboarded = function() {
@@ -61,31 +61,64 @@ angular.module('sokisoki')
 		service.setOnboarded = function() {
 			ssDb.set('onboarded', true);
 		};
+		service.getUser = function() {
+			console.log('getting user');
+			return ssDb.get('tmp');
+		};
+		service.setUser = function(value, type) {
+			console.log('setting user');
+			console.log(JSON.stringify(value));
+			console.log(type);
+			ssDb.set('tmp', {
+				user: value,
+				type: type
+			});
+		};
+		service.clearUser = function() {
+			console.log('clearing user');
+			ssDb.remove('tmp');
+			ssDb.remove('onboarded');
+		};
 
 		if (typeof cordova == 'undefined') {
-			service.getUser = function() {
-				return 'user';
-			};
-			service.setUser = function() {};
-			service.clearUser = function() {};
+			// when running in browser, allow all routes
+			service.checkStatus = function(path, route) {
+				console.log(path + ': allowing user through');
+			}
 		} else {
-			service.getUser = function() {
-				console.log('getting user');
-				return ssDb.get('tmp');
-			};
-			service.setUser = function(value, type) {
-				console.log('setting user');
-				console.log(JSON.stringify(value));
-				console.log(type);
-				ssDb.set('tmp', {
-					user: value,
-					type: type
-				});
-			};
-			service.clearUser = function() {
-				console.log('clearing user');
-				ssDb.remove('tmp');
-				ssDb.remove('onboarded');
+			service.checkStatus = function(path) {
+				var defer = $q.defer();
+				var newPath = null;
+				switch (path) {
+					case '/home':
+						if (!service.getUser()) {
+							console.log('cannot access home: no user');
+							newPath = '/login';
+						} else if (!service.hasOnboarded()) {
+							console.log('cannot access home: not onboarded');
+							newPath = '/onboard';
+						}
+						break;
+					case '/login':
+						if (service.getUser()) {
+							console.log('cannot access login: already logged in');
+							newPath = '/home';
+						}
+						break;
+					case '/onboard':
+						if (!service.getUser()) {
+							console.log('cannot access onboard: no user');
+							newPath = '/login';
+						}
+						break;
+				}
+				if (newPath) {
+					$location.path(newPath);
+					defer.reject();
+				} else {
+					defer.resolve();
+				}
+				return defer.promise;
 			};
 		}
 

@@ -4,11 +4,6 @@
 angular.module('sokisoki')
 
 .controller('OnboardController', function($scope, $rootScope, $location, ssUserAuth, ssEventHandler) {
-	if (!ssUserAuth.getUser()) {
-		$location.path('/login');
-		return;
-	}
-
 	ssEventHandler.setBackButtonHandler(function(event) {
 		$rootScope.$apply(function() {
 			console.log(JSON.stringify(event));
@@ -59,17 +54,6 @@ angular.module('sokisoki')
 })
 
 .controller('HomeController', function($scope, ssScanner, $rootScope, ssUserAuth, $location, ssEventHandler, ssAppUtil) {
-	if (!ssUserAuth.getUser()) {
-		console.log('cannot access home: no user');
-		$location.path('/login');
-		return;
-	}
-	if (!ssUserAuth.hasOnboarded()) {
-		console.log('cannot access home: not onboarded');
-		$location.path('/onboard');
-		return;
-	}
-
 	ssEventHandler.setBackButtonHandler(function(event) {
 		console.log('handler in home');
 		ssAppUtil.exit();
@@ -97,11 +81,6 @@ angular.module('sokisoki')
 })
 
 .controller('LoginController', function($scope, $rootScope, ssFacebook, ssTwitter, ssUserAuth, $location, ssAppUtil, ssEventHandler) {
-	if (ssUserAuth.getUser()) {
-		$location.path('/home');
-		return;
-	}
-
 	ssEventHandler.setBackButtonHandler(function(event) {
 		ssAppUtil.exit();
 	});

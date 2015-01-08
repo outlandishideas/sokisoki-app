@@ -2,24 +2,24 @@
 
 angular.module('sokisoki')
 
-//	.config(function($routeProvider, ssUserAuth) {
-//		var originalWhen = $routeProvider.when;
-//
-//		$routeProvider.when = function(path, route){
-//			// always run the resolvers
-//			if (!route.resolve) {
-//				route.resolve = {};
-//			}
-//			route.resolve.checkUser = function() {
-//				var u = ssUserAuth.get();
-//				console.log('user');
-//				console.log(u);
-//			};
-//
-//			originalWhen(path, route);
-//			return $routeProvider;
-//		};
-//	})
+	.config(['$routeProvider', function($routeProvider) {
+		// add an additional resolver to all routes, which checks the user login and redirects if necessary
+		var originalWhen = $routeProvider.when;
+
+		$routeProvider.when = function(path, route){
+			if (!route.resolve) {
+				route.resolve = {};
+			}
+
+			route.resolve.checkLogin = function(ssUserAuth) {
+				return ssUserAuth.checkStatus(path);
+			};
+
+			originalWhen.call($routeProvider, path, route);
+
+			return $routeProvider;
+		};
+	}])
 
 	.config(function($routeProvider) {
         $routeProvider.when('/login', {

@@ -125,6 +125,7 @@ body, .main-content {
 
 .popup {
 	z-index: 5;
+	background-color: rgba(1, 1, 1, 0.7);
 }
 
 .popup .popup-content {
