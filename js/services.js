@@ -8,8 +8,22 @@ angular.module('sokisoki')
 		return window.OAuth;
 	})
 
-	.factory('ssScanner', function() {
-		return typeof cordova != 'undefined' ? cordova.require("cordova/plugin/BarcodeScanner") : null;
+	.factory('ssScanner', function($timeout) {
+		if (typeof cordova != 'undefined') {
+			return cordova.require("cordova/plugin/BarcodeScanner");
+		}
+		// create a fake one
+		return {
+			scan: function(callback) {
+				if (callback) {
+					$timeout(function() {
+						callback({
+							text: 'abcd'
+						});
+					});
+				}
+			}
+		};
 	})
 
 	.factory('ssAppUtil', function() {
@@ -52,7 +66,7 @@ angular.module('sokisoki')
 		return service;
 	})
 
-	.factory('ssUserAuth', ['$q', 'ssDb', '$location', function($q, ssDb, $location) {
+	.factory('ssUserUtil', ['$q', 'ssDb', '$location', function($q, ssDb, $location) {
 		var service = {};
 
 		service.hasOnboarded = function() {
@@ -78,6 +92,10 @@ angular.module('sokisoki')
 			console.log('clearing user');
 			ssDb.remove('tmp');
 			ssDb.remove('onboarded');
+			ssDb.remove('history');
+		};
+		service.getHistory = function() {
+			return ssDb.get('history');
 		};
 
 		if (typeof cordova == 'undefined') {
@@ -89,32 +107,35 @@ angular.module('sokisoki')
 			service.checkStatus = function(path) {
 				var defer = $q.defer();
 				var newPath = null;
+				var reason = null;
 				switch (path) {
 					case '/home':
+					case '/history':
 						if (!service.getUser()) {
-							console.log('cannot access home: no user');
+							reason = 'no user';
 							newPath = '/login';
 						} else if (!service.hasOnboarded()) {
-							console.log('cannot access home: not onboarded');
+							reason = 'not onboarded';
 							newPath = '/onboard';
 						}
 						break;
 					case '/login':
 						if (service.getUser()) {
-							console.log('cannot access login: already logged in');
-							newPath = '/home';
+							reason = 'already logged in';
+							newPath = '/history';
 						}
 						break;
 					case '/onboard':
 						if (!service.getUser()) {
-							console.log('cannot access onboard: no user');
+							reason = 'no user';
 							newPath = '/login';
 						}
 						break;
 				}
 				if (newPath) {
+					console.log('cannot access ' + path + ': ' + reason);
 					$location.path(newPath);
-					defer.reject();
+					defer.reject(reason);
 				} else {
 					defer.resolve();
 				}

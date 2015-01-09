@@ -1,3 +1,7 @@
+html, body {
+	overflow-x: hidden;
+}
+
 body, .main-content {
 	position: absolute;
 	left: 0;
@@ -17,7 +21,7 @@ body, .main-content {
 	right: 0;
 	top: 0;
 	bottom: 0;
-	padding: 5px;
+	padding: 0;
 	background: #fff;
 	overflow-y: auto;
 }
@@ -123,6 +127,65 @@ body, .main-content {
 	display: none;
 }
 
+.page-container.history {
+	padding: 0;
+}
+.page-container.history .action-history {
+	margin: 0;
+}
+.page-container.history .action-history-item {
+	border-radius: 0;
+	border-width: 1px 0;
+	padding: 0;
+}
+.page-container.history .action-history-item .action-icon {
+	font-size: 30px;
+	padding-top: 18px;
+	color: #333;
+	padding-left: 10px;
+	float: left;
+	clear: both;
+}
+
+.page-container.history .action-history-item .details {
+	margin-left: 50px;
+	padding: 10px 0 10px 10px;
+	background: #fff;
+}
+.page-container.history .action-history-item .details .action-type {
+	text-transform: uppercase;
+	font-size: 1rem;
+}
+.page-container.history .action-history-item .details .description {
+	font-size: 2rem;
+}
+.page-container.history .action-history-item .details .date {
+	font-size: 0.75rem;
+}
+.page-container.history .action-history-item .arrow {
+	float: right;
+	padding: 28px 10px 0 0;
+}
+
+.page-container.product {
+	margin-bottom: 60px;
+}
+.page-container.product .product-details {
+	height: 1000px;
+	background: #ddd;
+}
+.product-actions .row {
+	margin: 0;
+}
+.product-actions .soki-action {
+	text-align: center;
+}
+.product-actions .soki-action .fa {
+	color: #fff;
+	font-size: 3rem;
+	line-height: 6rem;
+}
+
 .popup {
 	z-index: 5;
 	background-color: rgba(1, 1, 1, 0.7);
@@ -132,9 +195,41 @@ body, .main-content {
 	margin: 30px;
 }
 
+
+
+.main-content .soki-action.action-buy { background-color: #ACEADE; }
+.main-content .soki-action.action-scan { background-color: #68D0EC; }
+.main-content .soki-action.action-want { background-color: #F0EFA0; }
+.main-content .soki-action.action-love { background-color: #FEAFB9; }
+
 .navbar {
 	margin: 0;
 	border-width: 0 0 1px;
+	border-color: #47c8ab;
+	color: #fff;
+	background-color: #87e2d1;
+	font-family: 'AvenirBook', serif;
+	z-index: 2;
+}
+.navbar > .row {
+	margin: 0;
+}
+
+.navbar h1 {
+	margin: 0;
+	text-align: center;
+	font-size: 3rem;
+	line-height: 50px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.navbar .side-button {
+	font-size: 3rem;
+	text-align: center;
+}
+.navbar .side-button .fa {
+	margin-top: 10px;
 }
 
 .anchor-bottom {
@@ -144,3 +239,71 @@ body, .main-content {
 	right: 0;
 }
 
+#overlay {
+	z-index: 0;
+	background: rgba(1, 1, 1, 0);
+	transition: background-color 0.2s ease;
+	-webkit-transition: background-color 0.2s ease;
+}
+#menu-container.shown #overlay {
+	background: rgba(1, 1, 1, 0.7);
+	z-index: 10;
+	transition: background-color 0.2s ease;
+	-webkit-transition: background-color 0.2s ease;
+}
+#user-menu {
+	z-index: 11;
+	left: 100%;
+	right: auto;
+	width: 80%;
+	transition: all 0.2s ease-in-out;
+	-webkit-transition: all 0.2s ease-in-out;
+	background: #333;
+	padding: 0;
+	border-left: 1px solid #222;
+}
+#menu-container.shown #user-menu {
+	left: 20%;
+	transition: all 0.2s ease-in-out;
+	-webkit-transition: all 0.2s ease-in-out;
+}
+
+#user-menu .list-group {
+	margin: 0;
+}
+
+#user-menu h2,
+#user-menu .list-group-item {
+	background: none;
+	border: 0;
+	font-size: 1.5rem;
+	line-height: 5rem;
+	color: #fff;
+	padding: 0 10px;
+	margin: 0;
+	font-family: 'avenirbook', serif;
+	border-radius: 0;
+	-webkit-border-radius: 0;
+}
+#user-menu .list-group-item:active {
+	background: #4d4d4d;
+}
+
+#user-menu .list-group-item .menu-icon {
+	float: right;
+	font-size: 2.5rem;
+}
+#user-menu .btn {
+	color: #fff;
+	border-color: #555;
+}
+#user-menu .btn-default {
+	background-color: #333;
+}
+#user-menu .btn-primary {
+	background-color: #4d4d4d;
+}
+
+.page-container.terms-and-conditions {
+	padding: 10px;
+}

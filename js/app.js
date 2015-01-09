@@ -21,4 +21,23 @@ angular.module('sokisoki', ['ngTouch', 'ngRoute', 'ngCordova', 'ui.bootstrap'])
 			ssEventHandler.clearBackButtonHandler();
 		});
 	}])
+
+	.constant('ACTIONS', {
+		buy: {
+			present: 'buy',
+			past: 'bought'
+		},
+		love: {
+			present: 'love',
+			past: 'loved'
+		},
+		scan: {
+			present: 'scan',
+			past: 'scanned'
+		},
+		want: {
+			present: 'want',
+			past: 'wanted'
+		}
+	})
 ;

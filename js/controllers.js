@@ -3,22 +3,22 @@
 /* Controllers */
 angular.module('sokisoki')
 
-.controller('OnboardController', function($scope, $rootScope, $location, ssUserAuth, ssEventHandler) {
+.controller('OnboardController', function($scope, $rootScope, $location, ssUserUtil, ssEventHandler) {
 	ssEventHandler.setBackButtonHandler(function(event) {
 		$rootScope.$apply(function() {
 			console.log(JSON.stringify(event));
 			console.log('onboard back');
-			ssUserAuth.setOnboarded();
+			ssUserUtil.setOnboarded();
 			console.log('going home');
-			$location.path('/home');
+			$location.path('/history');
 		});
 	});
 
 	$scope.finished = function() {
 		console.log('finished');
-		ssUserAuth.setOnboarded();
+		ssUserUtil.setOnboarded();
 		console.log('going home');
-		$location.path('/home');
+		$location.path('/history');
 	};
 
 	$scope.slides = [
@@ -53,25 +53,34 @@ angular.module('sokisoki')
 	};
 })
 
-.controller('HomeController', function($scope, ssScanner, $rootScope, ssUserAuth, $location, ssEventHandler, ssAppUtil) {
+// base controller for all logged-in screens
+.controller('UserController', function($scope, $rootScope, $location, ssScanner, ssUserUtil, ssEventHandler, ssAppUtil) {
 	ssEventHandler.setBackButtonHandler(function(event) {
-		console.log('handler in home');
-		ssAppUtil.exit();
+		$scope.$apply(function() {
+			if (!$scope.menuState || !$scope.menuState.toggleMenu(false)) {
+				$location.path('/history');
+			}
+		});
 	});
+})
+
+.controller('TermsAndConditionsController', function($scope, $controller) {
+	// call base controller
+	$controller('UserController', {$scope: $scope});
+
+	$scope.menuState = {
+		title: 'T\'s & C\'s',
+		show: false
+	};
+
+})
+
+.controller('HomeController', function($scope, $rootScope, $controller) {
+	// call base controller
+	$controller('UserController', {$scope: $scope});
 
 	$scope.copyright = new Date();
 
-	$scope.signOut = function() {
-		ssUserAuth.clearUser();
-		$location.path('/login');
-	};
-	$scope.scan = function() {
-		ssScanner.scan(function(result) {
-			$rootScope.$apply(function() {
-				$scope.scannedBarcode = result.text;
-			});
-		});
-	};
 	$scope.showInfo = function () {
 		$rootScope.showInfoPanel = true;
 	};
@@ -80,7 +89,131 @@ angular.module('sokisoki')
 	};
 })
 
-.controller('LoginController', function($scope, $rootScope, ssFacebook, ssTwitter, ssUserAuth, $location, ssAppUtil, ssEventHandler) {
+.controller('ProductController', function($scope, $rootScope, $controller, $location, $routeParams, ssEventHandler, $timeout, ACTIONS) {
+	// call base controller
+	$controller('UserController', {$scope: $scope});
+
+	$scope.menuState = {
+		title: 'Loading...',
+		show: false
+	};
+
+	$scope.barcode = $routeParams.barcode;
+
+	$scope.actions = [ ACTIONS.want, ACTIONS.love, ACTIONS.buy ];
+
+	$scope.performAction = function(action) {
+		console.log('performing action: ' + action.present);
+	};
+
+	//todo: tmp
+	$timeout(function() {
+		$scope.menuState.title = 'Braun';
+	}, 1000);
+})
+
+.controller('HistoryController', function($scope, $rootScope, $location, $controller, ssEventHandler, ssAppUtil, ssUserUtil, ACTIONS) {
+	// call base controller
+	$controller('UserController', {$scope: $scope});
+
+	$scope.menuState = {
+		title: 'History',
+		show: false
+	};
+
+	ssEventHandler.setBackButtonHandler(function(event) {
+		$scope.$apply(function() {
+			if (!$scope.menuState.toggleMenu(false)) {
+				ssAppUtil.exit();
+			}
+		});
+	});
+
+	$scope.showEvent = function(event) {
+		$location.path('/product/' + event.barcode);
+	};
+//	$scope.history = ssUserUtil.getHistory();
+	var history = [
+		{
+			action: ACTIONS.buy,
+			barcode: '1234',
+			description: 'Braun Shaver',
+			date: new Date('2014-12-10 00:00:00')
+		},
+		{
+			action: ACTIONS.love,
+			barcode: '1234',
+			description: 'Braun Shaver',
+			date: new Date('2014-12-12 00:00:00')
+		},
+		{
+			action: ACTIONS.want,
+			barcode: '1234',
+			description: 'Braun Shaver',
+			date: new Date('2014-12-15 00:00:00')
+		},
+		{
+			action: ACTIONS.scan,
+			barcode: '1234',
+			description: 'Braun Shaver',
+			date: new Date('2014-12-20 00:00:00')
+		},
+		{
+			action: ACTIONS.scan,
+			barcode: '1234',
+			description: 'Braun Shaver',
+			date: new Date('2014-12-26 00:00:00')
+		},
+		{
+			action: ACTIONS.love,
+			barcode: '1234',
+			description: 'Braun Shaver',
+			date: new Date('2015-01-01 00:00:00')
+		},
+		{
+			action: ACTIONS.love,
+			barcode: '1234',
+			description: 'Braun Shaver',
+			date: new Date('2015-01-01 00:00:00')
+		},
+		{
+			action: ACTIONS.love,
+			barcode: '1234',
+			description: 'Braun Shaver',
+			date: new Date('2015-01-01 00:00:00')
+		},
+		{
+			action: ACTIONS.love,
+			barcode: '1234',
+			description: 'Braun Shaver',
+			date: new Date('2015-01-01 00:00:00')
+		},
+		{
+			action: ACTIONS.love,
+			barcode: '1234',
+			description: 'Braun Shaver',
+			date: new Date('2015-01-01 00:00:00')
+		},
+		{
+			action: ACTIONS.love,
+			barcode: '1234',
+			description: 'Braun Shaver',
+			date: new Date('2015-01-01 00:00:00')
+		},
+		{
+			action: ACTIONS.love,
+			barcode: '1234',
+			description: 'Braun Shaver',
+			date: new Date('2015-01-01 00:00:00')
+		}
+	];
+	history.sort(function(a, b) {
+		return a.date > b.date ? -1 : 1;
+	});
+	$scope.history = history;
+})
+
+.controller('LoginController', function($scope, $rootScope, ssFacebook, ssTwitter, ssUserUtil, $location, ssAppUtil, ssEventHandler) {
 	ssEventHandler.setBackButtonHandler(function(event) {
 		ssAppUtil.exit();
 	});
@@ -98,8 +231,8 @@ angular.module('sokisoki')
 		$scope.signingIn = true;
 		ssFacebook.login()
 			.then(function(data) {
-				ssUserAuth.setUser(data, 'facebook');
-				$location.path('/home');
+				ssUserUtil.setUser(data, 'facebook');
+				$location.path('/history');
 			}, function(data) {
 				console.log('error signing in to facebook');
 				$scope.signingIn = false;
@@ -110,8 +243,8 @@ angular.module('sokisoki')
 		$scope.signingIn = true;
 		ssTwitter.login()
 			.then(function(data) {
-				ssUserAuth.setUser(data, 'twitter');
-				$location.path('/home');
+				ssUserUtil.setUser(data, 'twitter');
+				$location.path('/history');
 			}, function(data) {
 				console.log('error signing in to twitter');
 				$scope.signingIn = false;

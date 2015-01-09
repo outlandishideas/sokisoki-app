@@ -1,0 +1,16 @@
+<soki-navbar state="menuState"></soki-navbar>
+
+<div class="main-content with-header">
+	<div class="page-container product">
+		<div class="product-details">
+			product {{ barcode }}
+		</div>
+	</div>
+	<div class="anchor-bottom product-actions">
+		<div class="row">
+			<div class="col-xs-4 soki-action action-{{action.present}}" ng-repeat="action in actions" ng-click="performAction(action)">
+				<div action-icon="action"></div>
+			</div>
+		</div>
+	</div>
+</div>

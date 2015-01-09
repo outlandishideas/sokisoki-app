@@ -11,8 +11,8 @@ angular.module('sokisoki')
 				route.resolve = {};
 			}
 
-			route.resolve.checkLogin = function(ssUserAuth) {
-				return ssUserAuth.checkStatus(path);
+			route.resolve.checkLogin = function(ssUserUtil) {
+				return ssUserUtil.checkStatus(path);
 			};
 
 			originalWhen.call($routeProvider, path, route);
@@ -25,19 +25,31 @@ angular.module('sokisoki')
         $routeProvider.when('/login', {
 	        templateUrl: 'views/login.html',
 	        controller: 'LoginController'
-        });
-        $routeProvider.when('/home', {
-	        templateUrl: 'views/home.html',
-	        controller: 'HomeController'
-        });
-        $routeProvider.when('/onboard', {
+        })
+//        .when('/home', {
+//	        templateUrl: 'views/home.html',
+//	        controller: 'HomeController'
+//        })
+        .when('/history', {
+	        templateUrl: 'views/history.html',
+	        controller: 'HistoryController'
+        })
+        .when('/onboard', {
 	        templateUrl: 'views/onboard.html',
 	        controller: 'OnboardController'
-        });
+        })
+        .when('/product/:barcode', {
+	        templateUrl: 'views/product.html',
+	        controller: 'ProductController'
+        })
+        .when('/terms-and-conditions', {
+	        templateUrl: 'views/termsAndConditions.html',
+	        controller: 'TermsAndConditionsController'
+        })
 //        $routeProvider.when('/view1', {
 //	        templateUrl: 'partials/notificationView.html'
 //        });
-        $routeProvider.otherwise({redirectTo: '/home'});
+        .otherwise({redirectTo: '/history'});
 	})
 
 ;

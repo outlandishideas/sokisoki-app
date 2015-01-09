@@ -1,0 +1,20 @@
+<soki-navbar state="menuState"></soki-navbar>
+
+<div class="main-content with-header">
+	<div class="page-container history">
+		<div class="no-history" ng-show="!history || history.length == 0">
+			You haven't scanned anything yet. Use the scan button above to start your soki soki adventure
+		</div>
+		<div class="action-history list-group" ng-show="history && history.length > 0">
+			<a class="action-history-item soki-action action-{{event.action.present}} list-group-item" ng-repeat="event in history" ng-click="showEvent(event)">
+				<div action-icon="event.action"></div>
+				<div class="arrow glyphicon glyphicon-chevron-right"></div>
+				<div class="details">
+					<div class="action-type">{{event.action.past}}</div>
+					<div class="description">{{ event.description }}</div>
+					<div class="date">{{ event.date | date: 'd MMM' }}</div>
+				</div>
+			</a>
+		</div>
+	</div>
+</div>

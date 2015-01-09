@@ -1,0 +1,43 @@
+<nav class="navbar navbar-default">
+	<div class="row">
+		<div class="col-xs-2 left-button side-button">
+			<div class="scan-button fa fa-camera" ng-click="scan()"></div>
+		</div>
+		<div class="col-xs-8">
+			<h1>{{state.title}}</h1>
+		</div>
+		<div class="col-xs-2 right-button side-button">
+			<div class="menu-button fa fa-ellipsis-v" ng-click="toggleMenu(true, 'nav')"></div>
+		</div>
+	</div>
+</nav>
+
+<div id="menu-container" ng-class="{'page-container': true, 'shown': state.show}">
+	<div id="overlay" class="page-container" ng-click="toggleMenu(false, 'overlay')"></div>
+	<div id="user-menu" class="page-container">
+		<h2>Settings</h2>
+		<ul class="list-group">
+			<li class="list-group-item" ng-click="history()">
+				<div class="menu-icon"><span class="fa fa-history"></span></div>
+				<div class="menu-label">My History</div>
+			</li>
+			<li class="list-group-item" ng-click="onboard()">
+				<div class="menu-icon"><span class="fa fa-life-ring"></span></div>
+				<div class="menu-label">Getting Started</div>
+			</li>
+			<li class="list-group-item" ng-click="tsAndCs()">
+				<div class="menu-icon"><span class="fa fa-clipboard"></span></div>
+				<div class="menu-label">Terms and Conditions</div>
+			</li>
+			<li class="list-group-item" ng-click="signOutCheck()">
+				<div class="menu-icon"><span class="fa fa-sign-out"></span></div>
+				<div class="menu-label">Sign Out</div>
+			</li>
+			<li class="list-group-item" ng-show="signOutTest">
+				<div class="menu-label">Are you sure?</div>
+				<div class="btn btn-primary" ng-click="signOut()">Yes</div>
+				<div class="btn btn-default" ng-click="signOutCancel()">No</div>
+			</li>
+		</ul>
+	</div>
+</div>
