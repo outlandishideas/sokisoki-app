@@ -66,6 +66,8 @@ angular.module('sokisoki')
 
 						defer.resolve();
 					});
+
+					return defer.promise;
 				}
 			}
         })

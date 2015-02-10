@@ -25,10 +25,10 @@ angular.module('sokisoki')
 							icon = 'shopping-cart';
 							break;
 						case ACTIONS.love.present:
-							icon = 'heart-o';
+							icon = 'heart';
 							break;
 						case ACTIONS.want.present:
-							icon = 'star-o';
+							icon = 'star';
 							break;
 					}
 					if (icon) {

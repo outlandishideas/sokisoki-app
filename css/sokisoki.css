@@ -11,6 +11,31 @@ body, .main-content {
 	font-family: 'AvenirMedium', serif;
 }
 
+.soki-action.action-buy,
+.soki-action.action-buy:hover,
+.soki-action.action-buy:focus {
+	background-color: #A1D5C9;
+	color: #A1D5C9;
+}
+.soki-action.action-scan,
+.soki-action.action-scan:hover,
+.soki-action.action-scan:focus {
+	background-color: #76BBD9;
+	color: #76BBD9;
+}
+.soki-action.action-want,
+.soki-action.action-want:hover,
+.soki-action.action-want:focus {
+	background-color: #FFC853;
+	color: #FFC853;
+}
+.soki-action.action-love,
+.soki-action.action-love:hover,
+.soki-action.action-love:focus {
+	background-color: #EF6E7B;
+	color: #EF6E7B;
+}
+
 .main-content.with-header {
 	top: 50px;
 }
@@ -27,7 +52,7 @@ body, .main-content {
 }
 
 .page-container.sign-in {
-	background: #87e2d1;
+	background: #76bbd9;
 	padding: 30px;
 	color: #333;
 	font-size: 1.7rem;
@@ -76,14 +101,14 @@ body, .main-content {
 }
 
 .page-container.onboard {
-	background: #87e2d1;
+	background: #76bbd9;
 	padding: 100px 0 0;
 }
 .page-container.onboard .anchor-bottom {
 	padding: 0 20px 20px;
 }
 .page-container.onboard .btn-got-it {
-	background-color: #47c8ab;
+	background-color: #63a5c3;
 	color: #fff;
 }
 .page-container.onboard .slide {
@@ -100,7 +125,7 @@ body, .main-content {
 	width: 160px;
 	height: 160px;
 	border-radius: 80px;
-	background: #47c8ab;
+	background: #63a5c3;
 	color: #fff;
 	font-size: 80px;
 	line-height: 160px;
@@ -111,14 +136,14 @@ body, .main-content {
 }
 
 .page-container.onboard .carousel-indicators li {
-	border-color: #47c8ab;
+	border-color: #63a5c3;
 	width: 14px;
 	height: 14px;
 	margin: 1px 5px;
 	transition: background-color 1s ease;
 }
 .page-container.onboard .carousel-indicators li.active {
-	background-color: #47c8ab;
+	background-color: #63a5c3;
 	width: 16px;
 	height: 16px;
 	margin: 0 4px;
@@ -138,18 +163,14 @@ body, .main-content {
 	border-radius: 0;
 	border-width: 1px 0;
 	padding: 0;
+	color: #333;
 }
 .page-container.history .action-history-item .action-icon {
-	font-size: 30px;
-	padding-top: 18px;
-	color: #333;
-	padding-left: 10px;
-	float: left;
-	clear: both;
+	display: none;
 }
 
 .page-container.history .action-history-item .details {
-	margin-left: 50px;
+	margin-left: 8px;
 	padding: 10px 0 10px 10px;
 	background: #fff;
 }
@@ -170,21 +191,50 @@ body, .main-content {
 
 .page-container.product {
 	margin-bottom: 60px;
-}
-.page-container.product .product-details {
-	height: 1000px;
 	background: #ddd;
 }
+.page-container.product h1 {
+	text-align: center;
+}
+.page-container.product .product-details .product-content {
+	padding: 0 10px;
+}
+.page-container.product .product-details .product-content-youtube,
+.page-container.product .product-details .product-content-image {
+	padding: 0;
+}
+.page-container.product .product-details .product-content-link {
+	background-color: #76BBD9;
+	text-align: center;
+	padding: 0;
+}
+.page-container.product .product-details .product-content-link .link {
+	padding: 10px 0;
+	text-transform: uppercase;
+	color: #fff;
+	cursor: pointer;
+}
+.page-container.product .product-details .product-content-image img {
+	width: 100%;
+}
+.page-container.product .product-details .product-content + .product-content {
+	margin-top: 10px;
+}
+
 .product-actions .row {
 	margin: 0;
 }
 .product-actions .soki-action {
 	text-align: center;
+	background-color: #f2f2f2;
 }
 .product-actions .soki-action .fa {
-	color: #fff;
 	font-size: 3rem;
-	line-height: 6rem;
+	line-height: 4rem;
+}
+.product-actions .soki-action .action-label {
+	color: #333;
+	padding-bottom: 5px;
 }
 
 .popup {
@@ -198,17 +248,12 @@ body, .main-content {
 
 
 
-.main-content .soki-action.action-buy { background-color: #ACEADE; }
-.main-content .soki-action.action-scan { background-color: #68D0EC; }
-.main-content .soki-action.action-want { background-color: #F0EFA0; }
-.main-content .soki-action.action-love { background-color: #FEAFB9; }
-
 .navbar {
 	margin: 0;
 	border-width: 0 0 1px;
-	border-color: #47c8ab;
+	border-color: #63a5c3;
 	color: #fff;
-	background-color: #87e2d1;
+	background-color: #76bbd9;
 	font-family: 'AvenirBook', serif;
 	z-index: 2;
 }

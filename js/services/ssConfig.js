@@ -1,23 +1,27 @@
 angular
     .module('sokisoki')
     .value('config', {
-        API_ENDPOINT: 'http://sokisoki.beta.gd/api',
+        API_ENDPOINT: 'http://sokisoki.com/api',
         ACTIONS: {
             buy: {
                 present: 'buy',
-                past: 'bought'
+                past: 'bought',
+                label: 'Buy this'
             },
             love: {
                 present: 'love',
-                past: 'loved'
+                past: 'loved',
+                label: 'Love this'
             },
             scan: {
                 present: 'scan',
-                past: 'scanned'
+                past: 'scanned',
+                label: 'Scanned this'
             },
             want: {
                 present: 'want',
-                past: 'wanted'
+                past: 'wanted',
+                label: 'Wish list'
             }
         }
     })

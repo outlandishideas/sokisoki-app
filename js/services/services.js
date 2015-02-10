@@ -33,6 +33,13 @@ angular
 				} else if(navigator.device){
 					navigator.device.exitApp();
 				}
+			},
+			openExternalUrl: function(url) {
+				if (typeof navigator !== "undefined" && navigator.app) {
+					navigator.app.loadUrl(url, { openExternal:true });
+				} else {
+					window.open(url, "_blank");
+				}
 			}
 		};
 	})

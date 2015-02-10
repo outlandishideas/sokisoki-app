@@ -4,14 +4,16 @@ angular
         var API = ssConfig.get('API_ENDPOINT');
 
         var service = {},
-            _user;
+            _user = {
+                type: null
+            };
 
         service.get = function() {
             return _user;
         };
 
         service.load = function(value, type, done) {
-            _user = type;
+            _user.type = type;
             done();
             return;
             // todo
@@ -34,14 +36,8 @@ angular
             return _user.history;
         };
 
-        var onboarded = false;
         service.hasOnboarded = function() {
-            if(onboarded) {
-                return true;
-            }
-            onboarded = true;
-            return false;
-            //return _user.onboarded;
+            return _user.onboarded;
         };
 
         service.setOnboarded = function() {

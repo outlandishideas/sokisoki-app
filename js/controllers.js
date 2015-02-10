@@ -6,18 +6,13 @@ angular.module('sokisoki')
 .controller('OnboardController', function($scope, $rootScope, $location, ssUserUtil, ssEventHandler) {
 	ssEventHandler.setBackButtonHandler(function(event) {
 		$rootScope.$apply(function() {
-			console.log(JSON.stringify(event));
-			console.log('onboard back');
 			ssUserUtil.setOnboarded();
-			console.log('going home');
 			$location.path('/history');
 		});
 	});
 
 	$scope.finished = function() {
-		console.log('finished');
 		ssUserUtil.setOnboarded();
-		console.log('going home');
 		$location.path('/history');
 	};
 
@@ -43,14 +38,6 @@ angular.module('sokisoki')
 			icon: 'share-alt'
 		}
 	];
-
-	$scope.nextSlide = function() {
-		console.log('next slide');
-	};
-
-	$scope.previousSlide = function() {
-		console.log('previous slide');
-	};
 })
 
 // base controller for all logged-in screens
@@ -89,30 +76,42 @@ angular.module('sokisoki')
 	};
 })
 
-.controller('ProductController', function($scope, $rootScope, $controller, $location, $routeParams, ssEventHandler, $timeout, ssBarcode, ssConfig) {
+.controller('ProductController', function($scope, $rootScope, $controller, $location, $routeParams, ssEventHandler, $timeout, ssBarcode, ssConfig, ssAppUtil) {
 	var _actions = ssConfig.get('ACTIONS');
 
 	// call base controller
 	$controller('UserController', {$scope: $scope});
 
 	$scope.menuState = {
-		title: 'Loading...',
+		title: ssBarcode.get('brand'),
 		show: false
 	};
 
-	$scope.barcode = $routeParams.barcode;
+	var content = ssBarcode.get('metadata');
+	content.sort(function(a, b) {
+		return parseInt(a.seq) - parseInt(b.seq);
+	});
 
-	$scope.actions = [_actions.buy, _actions.love, _actions.want];
+	$scope.barcode = {
+		code: ssBarcode.get('barcode'),
+		brand: ssBarcode.get('brand'),
+		description: ssBarcode.get('description'),
+		hashtag: ssBarcode.get('hashtag'),
+		content: content
+	};
+
+	$scope.openUrl = ssAppUtil.openExternalUrl;
+
+	$scope.actions = [_actions.want, _actions.love, _actions.buy];
+
+	$scope.youtubeEmbed = function(id) {
+		return 'https://www.youtube.com/embed/' + id + '?showinfo=0&modestbranding=1&fs=0&rel=0&showinfo=0';
+	};
 
 	$scope.performAction = function(action) {
 		console.log('performing action: ' + action.present);
 		ssBarcode.doAction($routeParams.barcode, action.present);
 	};
-
-	//todo: tmp
-	$timeout(function() {
-		$scope.menuState.title = 'Braun';
-	}, 1000);
 })
 
 .controller('HistoryController', function($scope, $rootScope, $location, $controller, ssEventHandler, ssAppUtil, ssUserUtil, ssConfig) {

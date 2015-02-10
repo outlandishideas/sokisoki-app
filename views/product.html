@@ -2,14 +2,36 @@
 
 <div class="main-content with-header">
 	<div class="page-container product">
+		<h1>{{ barcode.description }}</h1>
 		<div class="product-details">
-			product {{ barcode }}
+			<div ng-repeat="row in barcode.content" class="product-content product-content-{{row.type}}">
+				<div ng-switch="row.type">
+					<div ng-switch-when="header">
+						<h2>{{row.value}}</h2>
+					</div>
+					<div ng-switch-when="text">
+						<p>{{row.value}}</p>
+					</div>
+					<div ng-switch-when="image">
+						<img ng-src="{{row.value}}" alt=""/>
+					</div>
+					<div ng-switch-when="link">
+						<div class="link" ng-click="openUrl(row.value)">Find out more</div>
+					</div>
+					<div ng-switch-when="youtube">
+						<iframe title="YouTube video player" class="youtube-player" type="text/html"
+						        width="100%" height="300" ng-src="{{youtubeEmbed(row.value)}}"
+						        frameborder="0" allowFullScreen></iframe>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	<div class="anchor-bottom product-actions">
 		<div class="row">
 			<div class="col-xs-4 soki-action action-{{action.present}}" ng-repeat="action in actions" ng-click="performAction(action)">
 				<div action-icon="action"></div>
+				<div class="action-label">{{action.label}}</div>
 			</div>
 		</div>
 	</div>
