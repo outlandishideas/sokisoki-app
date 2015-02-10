@@ -22,22 +22,7 @@ angular.module('sokisoki', ['ngTouch', 'ngRoute', 'ngCordova', 'ui.bootstrap'])
 		});
 	}])
 
-	.constant('ACTIONS', {
-		buy: {
-			present: 'buy',
-			past: 'bought'
-		},
-		love: {
-			present: 'love',
-			past: 'loved'
-		},
-		scan: {
-			present: 'scan',
-			past: 'scanned'
-		},
-		want: {
-			present: 'want',
-			past: 'wanted'
-		}
+	.value('log', function(msg) {
+		console.log('SOKI_DEBUG: ' + msg);
 	})
 ;

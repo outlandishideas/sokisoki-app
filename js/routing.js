@@ -11,6 +11,19 @@ angular.module('sokisoki')
 				route.resolve = {};
 			}
 
+			route.resolve.getConfig = function($q, ssConfig) {
+				var defer = $q.defer();
+
+				ssConfig.load(function(err) {
+					if(err) {
+						defer.reject();
+						return;
+					}
+
+					defer.resolve();
+				});
+			};
+
 			route.resolve.checkLogin = function(ssUserUtil) {
 				return ssUserUtil.checkStatus(path);
 			};
@@ -40,7 +53,21 @@ angular.module('sokisoki')
         })
         .when('/product/:barcode', {
 	        templateUrl: 'views/product.html',
-	        controller: 'ProductController'
+	        controller: 'ProductController',
+			resolve: {
+				loadBarcode: function($q, $route, $location, ssBarcode) {
+					var defer = $q.defer();
+
+					ssBarcode.load($route.current.params.barcode, function(err) {
+						if(err) {
+							$location.path('/history');
+							return;
+						}
+
+						defer.resolve();
+					});
+				}
+			}
         })
         .when('/terms-and-conditions', {
 	        templateUrl: 'views/termsAndConditions.html',

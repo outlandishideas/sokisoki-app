@@ -89,7 +89,9 @@ angular.module('sokisoki')
 	};
 })
 
-.controller('ProductController', function($scope, $rootScope, $controller, $location, $routeParams, ssEventHandler, $timeout, ACTIONS) {
+.controller('ProductController', function($scope, $rootScope, $controller, $location, $routeParams, ssEventHandler, $timeout, ssBarcode, ssConfig) {
+	var _actions = ssConfig.get('ACTIONS');
+
 	// call base controller
 	$controller('UserController', {$scope: $scope});
 
@@ -100,10 +102,11 @@ angular.module('sokisoki')
 
 	$scope.barcode = $routeParams.barcode;
 
-	$scope.actions = [ ACTIONS.want, ACTIONS.love, ACTIONS.buy ];
+	$scope.actions = [_actions.buy, _actions.love, _actions.want];
 
 	$scope.performAction = function(action) {
 		console.log('performing action: ' + action.present);
+		ssBarcode.doAction($routeParams.barcode, action.present);
 	};
 
 	//todo: tmp
@@ -112,7 +115,7 @@ angular.module('sokisoki')
 	}, 1000);
 })
 
-.controller('HistoryController', function($scope, $rootScope, $location, $controller, ssEventHandler, ssAppUtil, ssUserUtil, ACTIONS) {
+.controller('HistoryController', function($scope, $rootScope, $location, $controller, ssEventHandler, ssAppUtil, ssUserUtil, ssConfig) {
 	// call base controller
 	$controller('UserController', {$scope: $scope});
 
@@ -132,7 +135,11 @@ angular.module('sokisoki')
 	$scope.showEvent = function(event) {
 		$location.path('/product/' + event.barcode);
 	};
-//	$scope.history = ssUserUtil.getHistory();
+
+	// $scope.history = ssUserUtil.getHistory();
+
+	var ACTIONS = ssConfig.get('ACTIONS');
+
 	var history = [
 		{
 			action: ACTIONS.buy,
@@ -168,37 +175,37 @@ angular.module('sokisoki')
 			action: ACTIONS.love,
 			barcode: '1234',
 			description: 'Braun Shaver',
-			date: new Date('2015-01-01 00:00:00')
+			date: new Date('2014-01-01 00:00:00')
 		},
 		{
 			action: ACTIONS.love,
 			barcode: '1234',
 			description: 'Braun Shaver',
-			date: new Date('2015-01-01 00:00:00')
+			date: new Date('2014-01-01 00:00:00')
 		},
 		{
 			action: ACTIONS.love,
 			barcode: '1234',
 			description: 'Braun Shaver',
-			date: new Date('2015-01-01 00:00:00')
+			date: new Date('2014-01-01 00:00:00')
 		},
 		{
 			action: ACTIONS.love,
 			barcode: '1234',
 			description: 'Braun Shaver',
-			date: new Date('2015-01-01 00:00:00')
+			date: new Date('2014-01-01 00:00:00')
 		},
 		{
 			action: ACTIONS.love,
 			barcode: '1234',
 			description: 'Braun Shaver',
-			date: new Date('2015-01-01 00:00:00')
+			date: new Date('2014-01-01 00:00:00')
 		},
 		{
 			action: ACTIONS.love,
 			barcode: '1234',
 			description: 'Braun Shaver',
-			date: new Date('2015-01-01 00:00:00')
+			date: new Date('2014-01-01 00:00:00')
 		},
 		{
 			action: ACTIONS.love,
@@ -207,9 +214,11 @@ angular.module('sokisoki')
 			date: new Date('2015-01-01 00:00:00')
 		}
 	];
+
 	history.sort(function(a, b) {
 		return a.date > b.date ? -1 : 1;
 	});
+
 	$scope.history = history;
 })
 
@@ -231,8 +240,15 @@ angular.module('sokisoki')
 		$scope.signingIn = true;
 		ssFacebook.login()
 			.then(function(data) {
-				ssUserUtil.setUser(data, 'facebook');
-				$location.path('/history');
+				ssUserUtil.load(data, 'facebook', function(err) {
+					if(err) {
+						console.log('error signing in to twitter');
+						$scope.signingIn = false;
+						return;
+					}
+
+					$location.path('/history');
+				});
 			}, function(data) {
 				console.log('error signing in to facebook');
 				$scope.signingIn = false;
@@ -243,8 +259,15 @@ angular.module('sokisoki')
 		$scope.signingIn = true;
 		ssTwitter.login()
 			.then(function(data) {
-				ssUserUtil.setUser(data, 'twitter');
-				$location.path('/history');
+				ssUserUtil.load(data, 'twitter', function(err) {
+					if(err) {
+						console.log('error signing in to twitter');
+						$scope.signingIn = false;
+						return;
+					}
+
+					$location.path('/history');
+				});
 			}, function(data) {
 				console.log('error signing in to twitter');
 				$scope.signingIn = false;
