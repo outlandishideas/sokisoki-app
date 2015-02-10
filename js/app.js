@@ -23,6 +23,21 @@ angular.module('sokisoki', ['ngTouch', 'ngRoute', 'ngCordova', 'ui.bootstrap'])
 	}])
 
 	.value('log', function(msg) {
-		console.log('SOKI_DEBUG: ' + msg);
+		var e = new Error('dummy');
+		var stack = e.stack.replace(/^[^\(]+?[\n$]/gm, '')
+			.replace(/^\s+at\s+/gm, '')
+			.replace(/^Object.<anonymous>\s*\(/gm, '{anonymous}()@')
+			.split('\n');
+		var regex = /(.+)\s*\((.+):([0-9]+):([0-9]+)\)/g;
+		var args = regex.exec(stack[0]);
+		var file = args[2].split('/').slice(-2).join('/');
+		console.log('SOKI_DEBUG: ' + file + ' line ' + args[3] + ' :: ' + msg);
+	})
+
+	.config(function($sceDelegateProvider) {
+		$sceDelegateProvider.resourceUrlWhitelist([
+			'self',
+			'https://www.youtube.com/**'
+		]);
 	})
 ;
