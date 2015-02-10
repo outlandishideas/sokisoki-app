@@ -49,6 +49,7 @@ body, .main-content {
 	padding: 0;
 	background: #fff;
 	overflow-y: auto;
+	overflow-x: hidden;
 }
 
 .page-container.sign-in {

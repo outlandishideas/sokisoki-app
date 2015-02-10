@@ -7,19 +7,20 @@ angular
 		return window.OAuth;
 	})
 
-	.factory('ssScanner', function($timeout) {
+	.factory('ssScanner', function($timeout, log) {
 		if (typeof cordova != 'undefined') {
 			return cordova.require("cordova/plugin/BarcodeScanner");
 		}
 		// create a fake one
 		return {
 			scan: function(callback) {
+				log('Faking a scan');
 				if (callback) {
 					$timeout(function() {
 						callback({
-							text: 'abcd'
+							text: '1234'
 						});
-					});
+					}, 1000);
 				}
 			}
 		};

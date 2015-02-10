@@ -142,8 +142,8 @@ angular.module('sokisoki')
 	var history = [
 		{
 			action: ACTIONS.buy,
-			barcode: '1234',
-			description: 'Braun Shaver',
+			barcode: '5060020474859',
+			description: 'Gillette venus',
 			date: new Date('2014-12-10 00:00:00')
 		},
 		{
