@@ -37,6 +37,7 @@ angular.module('sokisoki', ['ngTouch', 'ngRoute', 'ngCordova', 'ui.bootstrap'])
 	.config(function($sceDelegateProvider) {
 		$sceDelegateProvider.resourceUrlWhitelist([
 			'self',
+			'http://www.youtube.com/**',
 			'https://www.youtube.com/**'
 		]);
 	})

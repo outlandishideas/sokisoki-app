@@ -105,7 +105,7 @@ angular.module('sokisoki')
 	$scope.actions = [_actions.want, _actions.love, _actions.buy];
 
 	$scope.youtubeEmbed = function(id) {
-		return 'https://www.youtube.com/embed/' + id + '?showinfo=0&modestbranding=1&fs=0&rel=0&showinfo=0';
+		return 'http://www.youtube.com/embed/' + id + '?showinfo=0&modestbranding=1&fs=0&rel=0&showinfo=0';
 	};
 
 	$scope.performAction = function(action) {

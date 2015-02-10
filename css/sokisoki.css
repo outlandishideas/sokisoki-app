@@ -273,9 +273,12 @@ body, .main-content {
 .navbar .side-button {
 	font-size: 3rem;
 	text-align: center;
+	padding: 0;
 }
 .navbar .side-button .fa {
 	margin-top: 10px;
+	width: 50px;
+	cursor: pointer;
 }
 
 .anchor-bottom {
