@@ -115,6 +115,7 @@ body, .main-content {
 	width: 14px;
 	height: 14px;
 	margin: 1px 5px;
+	transition: background-color 1s ease;
 }
 .page-container.onboard .carousel-indicators li.active {
 	background-color: #47c8ab;

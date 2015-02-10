@@ -8,7 +8,9 @@ angular.module('sokisoki')
 		}
 	}])
 
-	.directive('actionIcon', function(ACTIONS) {
+	.directive('actionIcon', function(ssConfig) {
+		var ACTIONS = ssConfig.get('ACTIONS');
+
 		return {
 			restrict: 'A',
 			link: function(scope, element, attrs) {
