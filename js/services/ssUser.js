@@ -34,6 +34,9 @@ angular
         };
 
         service.updateHistory = function(done) {
+            if (!_user) {
+                return;
+            }
             $http
                 .get(API + '/user/' + _user.user_id + '/history', {params: { token: _user.api_token }})
                 .then(function(res) {

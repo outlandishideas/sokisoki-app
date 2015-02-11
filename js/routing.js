@@ -66,12 +66,15 @@ angular.module('sokisoki')
 	        templateUrl: 'views/product.html',
 	        controller: 'ProductController',
 			resolve: {
-				loadBarcode: function($q, $route, $location, ssBarcode) {
+				loadBarcode: function($q, $route, $location, ssBarcode, ssAppUtil) {
 					var defer = $q.defer();
+					var barcode = $route.current.params.barcode;
 
-					ssBarcode.load($route.current.params.barcode, function(err) {
+					ssBarcode.load(barcode, function(err) {
 						if(err) {
+							defer.reject();
 							$location.path('/history');
+							ssAppUtil.showAlert('Product not found', 'Unrecognised barcode: ' + barcode);
 							return;
 						}
 

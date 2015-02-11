@@ -41,6 +41,13 @@ angular
 				} else {
 					window.open(url, "_blank");
 				}
+			},
+			showAlert: function(title, message) {
+				if (typeof navigator !== "undefined" && navigator.notification) {
+					navigator.notification.alert(message, null, title);
+				} else {
+					window.alert(message);
+				}
 			}
 		};
 	})

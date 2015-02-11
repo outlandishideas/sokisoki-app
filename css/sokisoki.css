@@ -225,13 +225,18 @@ body, .main-content {
 .product-actions .row {
 	margin: 0;
 }
-.product-actions .soki-action {
+.product-actions .soki-action,
+.product-actions .soki-action:hover {
 	text-align: center;
 	background-color: #f2f2f2;
+	cursor: pointer;
 }
 .product-actions .soki-action .fa {
 	font-size: 3rem;
 	line-height: 4rem;
+}
+.product-actions .soki-action:hover .fa {
+	color: #333;
 }
 .product-actions .soki-action .action-label {
 	color: #333;
