@@ -40,7 +40,7 @@ angular.module('sokisoki')
 		}
 	})
 
-	.directive('sokiNavbar', ['$location', 'ssScanner', 'ssUserUtil', function($location, ssScanner, ssUserUtil) {
+	.directive('sokiNavbar', ['$location', 'ssScanner', 'ssUserUtil', 'ssBarcode', 'ssConfig', function($location, ssScanner, ssUserUtil, ssBarcode, ssConfig) {
 		return {
 			restrict: 'E',
 			scope: {
@@ -48,6 +48,7 @@ angular.module('sokisoki')
 			},
 			templateUrl: 'views/partials/nav.html',
 			link: function(scope, element, attrs) {
+				var ACTIONS = ssConfig.get('ACTIONS');
 				var state = scope.state;
 				if (typeof state == 'undefined') {
 					state = {
@@ -60,8 +61,12 @@ angular.module('sokisoki')
 				}
 				scope.scan = function() {
 					ssScanner.scan(function(result) {
+						var scanned = result.text;
+						ssBarcode.doAction(scanned, ACTIONS.scan.present, function() {
+							//do nothing
+						});
 						scope.$apply(function() {
-							$location.path('/product/' + result.text);
+							$location.path('/product/' + scanned);
 						});
 					});
 				};

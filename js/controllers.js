@@ -135,85 +135,8 @@ angular.module('sokisoki')
 		$location.path('/product/' + event.barcode);
 	};
 
-	// $scope.history = ssUserUtil.getHistory();
-
 	var ACTIONS = ssConfig.get('ACTIONS');
-
-	var history = [
-		{
-			action: ACTIONS.buy,
-			barcode: '5060020474859',
-			description: 'Gillette venus',
-			date: new Date('2014-12-10 00:00:00')
-		},
-		{
-			action: ACTIONS.love,
-			barcode: '1234',
-			description: 'Braun Shaver',
-			date: new Date('2014-12-12 00:00:00')
-		},
-		{
-			action: ACTIONS.want,
-			barcode: '1234',
-			description: 'Braun Shaver',
-			date: new Date('2014-12-15 00:00:00')
-		},
-		{
-			action: ACTIONS.scan,
-			barcode: '1234',
-			description: 'Braun Shaver',
-			date: new Date('2014-12-20 00:00:00')
-		},
-		{
-			action: ACTIONS.scan,
-			barcode: '1234',
-			description: 'Braun Shaver',
-			date: new Date('2014-12-26 00:00:00')
-		},
-		{
-			action: ACTIONS.love,
-			barcode: '1234',
-			description: 'Braun Shaver',
-			date: new Date('2014-01-01 00:00:00')
-		},
-		{
-			action: ACTIONS.love,
-			barcode: '1234',
-			description: 'Braun Shaver',
-			date: new Date('2014-01-01 00:00:00')
-		},
-		{
-			action: ACTIONS.love,
-			barcode: '1234',
-			description: 'Braun Shaver',
-			date: new Date('2014-01-01 00:00:00')
-		},
-		{
-			action: ACTIONS.love,
-			barcode: '1234',
-			description: 'Braun Shaver',
-			date: new Date('2014-01-01 00:00:00')
-		},
-		{
-			action: ACTIONS.love,
-			barcode: '1234',
-			description: 'Braun Shaver',
-			date: new Date('2014-01-01 00:00:00')
-		},
-		{
-			action: ACTIONS.love,
-			barcode: '1234',
-			description: 'Braun Shaver',
-			date: new Date('2014-01-01 00:00:00')
-		},
-		{
-			action: ACTIONS.love,
-			barcode: '1234',
-			description: 'Braun Shaver',
-			date: new Date('2015-01-01 00:00:00')
-		}
-	];
-
+	var history = ssUserUtil.getHistory();
 	history.sort(function(a, b) {
 		return a.date > b.date ? -1 : 1;
 	});
@@ -221,7 +144,7 @@ angular.module('sokisoki')
 	$scope.history = history;
 })
 
-.controller('LoginController', function($scope, $rootScope, ssFacebook, ssTwitter, ssUserUtil, $location, ssAppUtil, ssEventHandler) {
+.controller('LoginController', function($scope, $rootScope, ssFacebook, ssTwitter, ssUserUtil, $location, ssAppUtil, ssEventHandler, log) {
 	ssEventHandler.setBackButtonHandler(function(event) {
 		ssAppUtil.exit();
 	});
@@ -235,21 +158,26 @@ angular.module('sokisoki')
 	};
 
 	$scope.signingIn = false;
+	var signInCallback = function(err) {
+		if(err) {
+			log('error signing in to sokisoki');
+			log(JSON.stringify(err));
+			$scope.signingIn = false;
+			return;
+		}
+
+		$location.path('/history');
+	};
+
 	$scope.facebookLogin = function() {
 		$scope.signingIn = true;
 		ssFacebook.login()
 			.then(function(data) {
-				ssUserUtil.load(data, 'facebook', function(err) {
-					if(err) {
-						console.log('error signing in to twitter');
-						$scope.signingIn = false;
-						return;
-					}
-
-					$location.path('/history');
-				});
+				log(data);
+				ssUserUtil.login('facebook', data.id, data.name, signInCallback);
 			}, function(data) {
-				console.log('error signing in to facebook');
+				log('error signing in to facebook');
+				log(data);
 				$scope.signingIn = false;
 			});
 	};
@@ -258,15 +186,7 @@ angular.module('sokisoki')
 		$scope.signingIn = true;
 		ssTwitter.login()
 			.then(function(data) {
-				ssUserUtil.load(data, 'twitter', function(err) {
-					if(err) {
-						console.log('error signing in to twitter');
-						$scope.signingIn = false;
-						return;
-					}
-
-					$location.path('/history');
-				});
+				ssUserUtil.login('twitter', data.id_str, data.screen_name, signInCallback);
 			}, function(data) {
 				console.log('error signing in to twitter');
 				$scope.signingIn = false;

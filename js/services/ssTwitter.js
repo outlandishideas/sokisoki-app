@@ -1,6 +1,16 @@
 angular
     .module('sokisoki')
     .factory('ssTwitter', ['$q', '$rootScope', 'ssOauth', function($q, $rootScope, ssOauth) {
+        if (typeof cordova == 'undefined') {
+            return {
+                login: function() {
+                    var q = $q.defer();
+                    q.resolve({id_str: '12349876', 'screen_name': 'rasmuswinter'});
+                    return q.promise;
+                }
+            }
+        }
+
         var options = {
             consumerKey: 'e7zQ94khCDqEmOkT2Gluiu1OB', // YOUR Twitter CONSUMER_KEY
             consumerSecret: 'vYGYsD0yAVgfzxvrtnKmHxTkoCo4jtCsauxOSV02XYnR8slGKg', // YOUR Twitter CONSUMER_SECRET

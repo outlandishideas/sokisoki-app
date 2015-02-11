@@ -2,50 +2,79 @@ angular
     .module('sokisoki')
     .factory('ssUserUtil', function($q, $http, $location, ssConfig, ssDb, log) {
         var API = ssConfig.get('API_ENDPOINT');
+        var ACTIONS = ssConfig.get('ACTIONS');
 
         var service = {},
-            _user = {
-                type: null
-            };
+            _user = null;
 
         service.get = function() {
             return _user;
         };
 
-        service.load = function(value, type, done) {
-            _user.type = type;
-            done();
-            return;
-            // todo
+        var setUser = function(user) {
+            _user = user;
+            ssDb.set('user', _user);
+        };
 
+        service.login = function(type, id, name, done) {
             $http
-                .post(API + '/user', { id: type + '-' + value.id })
+                //todo: make this a POST
+                .get(API + '/user/login', { params: {type: type, id: id, name: name }})
                 .then(function(res) {
-                    _user = res.data;
+                    log('logged in!');
+                    log(res);
+                    setUser(res.data);
                     done(null, _user);
                 }, function(err) {
+                    log('failed to log in');
+                    log(err);
+                    service.clearUser();
+                    done(err);
+                });
+        };
+
+        service.updateHistory = function(done) {
+            $http
+                .get(API + '/user/' + _user.user_id + '/history', {params: { token: _user.api_token }})
+                .then(function(res) {
+                    var history = res.data.history;
+                    for (var i=0; i<history.length; i++) {
+                        var item = history[i];
+                        if (item.action in ACTIONS) {
+                            item.action = ACTIONS[item.action];
+                        }
+                        item.date = new Date(item.date);
+                    }
+                    _user.history = history;
+                    setUser(_user);
+                    done(null, _user);
+                }, function(err) {
+                    log('failed to get history');
+                    log(err);
                     done(err);
                 });
         };
 
         service.clearUser = function() {
-            // todo
+            _user = null;
+            ssDb.set('user', _user);
         };
 
         service.getHistory = function() {
-            return _user.history;
+            return _user ? _user.history : [];
         };
 
         service.hasOnboarded = function() {
-            return _user.onboarded;
+            return _user && _user.onboarded;
         };
 
         service.setOnboarded = function() {
             _user.onboarded = true;
-            return;
+            ssDb.set('user', _user);
 
             $http
-                .post(API + '/user/onboarded', { onboarded: true })
+                //todo: make this a POST
+                .get(API + '/user/' + _user.user_id + '/onboarded', { params: { token: _user.api_token }})
                 .then(function() { }, function() { });
         };
 
@@ -94,5 +123,9 @@ angular
             };
         }
 
+        _user = ssDb.get('user');
+        if (!_user) {
+            service.clearUser();
+        }
         return service;
     });

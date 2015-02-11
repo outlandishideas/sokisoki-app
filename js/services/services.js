@@ -49,10 +49,10 @@ angular
 		var db = window.localStorage;
 		return {
 			get: function(key) {
-				return db.getItem(key);
+				return JSON.parse(db.getItem(key));
 			},
 			set: function(key, value) {
-				db.setItem(key, value);
+				db.setItem(key, JSON.stringify(value));
 			},
 			remove: function(key) {
 				db.removeItem(key);

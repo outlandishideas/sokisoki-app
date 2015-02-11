@@ -5,9 +5,6 @@ angular
             handlers = { backbutton: null };
 
         service.setHandler = function(action, handler) {
-            log('setting handler for ' + action);
-            log(handler);
-
             if (handlers[action]) {
                 document.removeEventListener(action, handlers[action]);
             }

@@ -45,7 +45,18 @@ angular.module('sokisoki')
 //        })
         .when('/history', {
 	        templateUrl: 'views/history.html',
-	        controller: 'HistoryController'
+	        controller: 'HistoryController',
+	        resolve: {
+		        loadHistory: function($q, ssUserUtil) {
+			        var defer = $q.defer();
+
+			        ssUserUtil.updateHistory(function(err) {
+				        defer.resolve();
+			        });
+
+			        return defer.promise;
+		        }
+	        }
         })
         .when('/onboard', {
 	        templateUrl: 'views/onboard.html',

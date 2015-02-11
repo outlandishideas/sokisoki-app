@@ -23,6 +23,9 @@ angular.module('sokisoki', ['ngTouch', 'ngRoute', 'ngCordova', 'ui.bootstrap'])
 	}])
 
 	.value('log', function(msg) {
+		if (typeof msg != 'string') {
+			msg = JSON.stringify(msg);
+		}
 		var e = new Error('dummy');
 		var stack = e.stack.replace(/^[^\(]+?[\n$]/gm, '')
 			.replace(/^\s+at\s+/gm, '')
@@ -37,6 +40,8 @@ angular.module('sokisoki', ['ngTouch', 'ngRoute', 'ngCordova', 'ui.bootstrap'])
 	.config(function($sceDelegateProvider) {
 		$sceDelegateProvider.resourceUrlWhitelist([
 			'self',
+			'http://sokisoki.com/**',
+			'http://www.sokisoki.com/**',
 			'http://www.youtube.com/**',
 			'https://www.youtube.com/**'
 		]);

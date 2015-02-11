@@ -1,6 +1,6 @@
 angular
     .module('sokisoki')
-    .factory('ssBarcode', function($http, ssConfig, log) {
+    .factory('ssBarcode', function($http, ssConfig, ssUserUtil, log) {
         var API = ssConfig.get('API_ENDPOINT'),
             ACTIONS = ssConfig.get('ACTIONS');
 
@@ -38,8 +38,11 @@ angular
                 return;
             }
 
+            var user = ssUserUtil.get();
+
             $http
-                .post(API + '/barcode/' + id + '/' + action, {})
+                //todo: make this a POST
+                .get(API + '/barcode/' + id + '/' + action, { params: { user_id: user.user_id, token: user.api_token}})
                 .then(function() {
                     log('action ' + action + ' performed successfully');
                     done(null);
