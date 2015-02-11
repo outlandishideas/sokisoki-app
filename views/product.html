@@ -28,6 +28,9 @@
 		</div>
 	</div>
 	<div class="anchor-bottom product-actions">
+		<div class="toast-container" ng-class="toast.classes()">
+			<span class="toast-message">{{ toast.message }}</span>
+		</div>
 		<div class="row">
 			<div class="col-xs-4 soki-action action-{{action.present}}" ng-repeat="action in actions" ng-click="performAction(action)">
 				<div action-icon="action"></div>

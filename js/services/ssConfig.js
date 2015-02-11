@@ -6,22 +6,26 @@ angular
             buy: {
                 present: 'buy',
                 past: 'bought',
-                label: 'Buy this'
+                label: 'Buy this',
+                alert: 'Bought! (todo)'
             },
             love: {
                 present: 'love',
                 past: 'loved',
-                label: 'Love this'
+                label: 'Love this',
+                alert: 'Loved! (todo)'
             },
             scan: {
                 present: 'scan',
                 past: 'scanned',
-                label: 'Scanned this'
+                label: 'Scanned this',
+                alert: 'Scanned! (todo)'
             },
             want: {
                 present: 'want',
                 past: 'wanted',
-                label: 'Wish list'
+                label: 'Wish list',
+                alert: 'Added to wish list! (todo)'
             }
         }
     })

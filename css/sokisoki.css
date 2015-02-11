@@ -366,3 +366,26 @@ body, .main-content {
 .no-history {
 	padding: 10px;
 }
+
+.toast-container {
+	text-align: center;
+}
+
+.toast-container.open {
+	height: 30px;
+	opacity: 1;
+	transition: height 0.2s ease, opacity 0.2s ease;
+}
+.toast-container.closed {
+	height: 0;
+	opacity: 0;
+	transition: height 0.2s ease, opacity 0.2s ease;
+}
+.toast-container.buy { background-color: #A1D5C9; }
+.toast-container.scan { background-color: #76BBD9; }
+.toast-container.want { background-color: #FFC853; }
+.toast-container.love { background-color: #EF6E7B; }
+.toast-container .toast-message {
+	line-height: 30px;
+	color: #fff;
+}

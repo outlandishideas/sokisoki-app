@@ -86,6 +86,14 @@ angular.module('sokisoki')
 		title: ssBarcode.get('brand'),
 		show: false
 	};
+	$scope.toast = {
+		message: '',
+		action: '',
+		classes: function() {
+			return ($scope.toast.message ? 'open ' : 'closed ') + $scope.toast.action;
+		},
+		promise: null
+	};
 
 	var content = ssBarcode.get('metadata');
 	content.sort(function(a, b) {
@@ -109,8 +117,16 @@ angular.module('sokisoki')
 	};
 
 	$scope.performAction = function(action) {
-		console.log('performing action: ' + action.present);
-		ssBarcode.doAction($routeParams.barcode, action.present);
+		if ($scope.toast.promise) {
+			$timeout.cancel($scope.toast.promise);
+		}
+		ssBarcode.doAction($routeParams.barcode, action.present, function() {
+			$scope.toast.message = action.alert;
+			$scope.toast.action = action.present;
+			$scope.toast.promise = $timeout(function() {
+				$scope.toast.message = '';
+			}, 3000);
+		});
 	};
 })
 
