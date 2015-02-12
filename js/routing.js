@@ -66,11 +66,11 @@ angular.module('sokisoki')
 	        templateUrl: 'views/product.html',
 	        controller: 'ProductController',
 			resolve: {
-				loadBarcode: function($q, $route, $location, ssBarcode, ssAppUtil) {
+				loadBarcode: function($q, $route, $location, sokiBarcode, ssAppUtil) {
 					var defer = $q.defer();
 					var barcode = $route.current.params.barcode;
 
-					ssBarcode.load(barcode, function(err) {
+					sokiBarcode.load(barcode, function(err) {
 						if(err) {
 							defer.reject();
 							$location.path('/history');

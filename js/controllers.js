@@ -41,7 +41,7 @@ angular.module('sokisoki')
 })
 
 // base controller for all logged-in screens
-.controller('UserController', function($scope, $rootScope, $location, ssScanner, ssUserUtil, ssEventHandler, ssAppUtil) {
+.controller('UserController', function($scope, $rootScope, $location, sokiScanner, ssUserUtil, ssEventHandler, ssAppUtil) {
 	ssEventHandler.setBackButtonHandler(function(event) {
 		$scope.$apply(function() {
 			if (!$scope.menuState || !$scope.menuState.toggleMenu(false)) {
@@ -76,14 +76,14 @@ angular.module('sokisoki')
 	};
 })
 
-.controller('ProductController', function($scope, $rootScope, $controller, $location, $routeParams, ssEventHandler, $timeout, ssBarcode, ssConfig, ssAppUtil) {
+.controller('ProductController', function($scope, $rootScope, $controller, $location, $routeParams, ssEventHandler, $timeout, sokiBarcode, ssConfig, ssAppUtil) {
 	var _actions = ssConfig.get('ACTIONS');
 
 	// call base controller
 	$controller('UserController', {$scope: $scope});
 
 	$scope.menuState = {
-		title: ssBarcode.get('brand'),
+		title: sokiBarcode.get('brand'),
 		show: false
 	};
 	$scope.toast = {
@@ -95,16 +95,16 @@ angular.module('sokisoki')
 		promise: null
 	};
 
-	var content = ssBarcode.get('metadata');
+	var content = sokiBarcode.get('metadata');
 	content.sort(function(a, b) {
 		return parseInt(a.seq) - parseInt(b.seq);
 	});
 
 	$scope.barcode = {
-		code: ssBarcode.get('barcode'),
-		brand: ssBarcode.get('brand'),
-		description: ssBarcode.get('description'),
-		hashtag: ssBarcode.get('hashtag'),
+		code: sokiBarcode.get('barcode'),
+		brand: sokiBarcode.get('brand'),
+		description: sokiBarcode.get('description'),
+		hashtag: sokiBarcode.get('hashtag'),
 		content: content
 	};
 
@@ -120,7 +120,7 @@ angular.module('sokisoki')
 		if ($scope.toast.promise) {
 			$timeout.cancel($scope.toast.promise);
 		}
-		ssBarcode.doAction($routeParams.barcode, action.present, function() {
+		sokiBarcode.doAction($routeParams.barcode, action.present, function() {
 			$scope.toast.message = action.alert;
 			$scope.toast.action = action.present;
 			$scope.toast.promise = $timeout(function() {

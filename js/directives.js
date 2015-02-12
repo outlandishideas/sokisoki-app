@@ -40,7 +40,7 @@ angular.module('sokisoki')
 		}
 	})
 
-	.directive('sokiNavbar', ['$location', 'ssScanner', 'ssUserUtil', 'ssBarcode', 'ssConfig', function($location, ssScanner, ssUserUtil, ssBarcode, ssConfig) {
+	.directive('sokiNavbar', ['$location', 'sokiScanner', 'ssUserUtil', 'sokiBarcode', 'ssConfig', function($location, sokiScanner, ssUserUtil, sokiBarcode, ssConfig) {
 		return {
 			restrict: 'E',
 			scope: {
@@ -60,9 +60,9 @@ angular.module('sokisoki')
 					state.show = false;
 				}
 				scope.scan = function() {
-					ssScanner.scan(function(result) {
+					sokiScanner.scan(function(result) {
 						var scanned = result.text;
-						ssBarcode.doAction(scanned, ACTIONS.scan.present, function() {
+						sokiBarcode.doAction(scanned, ACTIONS.scan.present, function() {
 							//do nothing
 						});
 						scope.$apply(function() {
