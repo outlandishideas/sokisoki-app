@@ -76,8 +76,8 @@ angular.module('sokisoki')
 	};
 })
 
-.controller('ProductController', function($scope, $rootScope, $controller, $location, $routeParams, ssEventHandler, $timeout, sokiBarcode, ssConfig, ssAppUtil) {
-	var _actions = ssConfig.get('ACTIONS');
+.controller('ProductController', function($scope, $rootScope, $controller, $location, $routeParams, ssEventHandler, $timeout, sokiBarcode, sokiConfig, ssAppUtil) {
+	var _actions = sokiConfig.get('ACTIONS');
 
 	// call base controller
 	$controller('UserController', {$scope: $scope});
@@ -130,7 +130,7 @@ angular.module('sokisoki')
 	};
 })
 
-.controller('HistoryController', function($scope, $rootScope, $location, $controller, ssEventHandler, ssAppUtil, ssUserUtil, ssConfig) {
+.controller('HistoryController', function($scope, $rootScope, $location, $controller, ssEventHandler, ssAppUtil, ssUserUtil, sokiConfig) {
 	// call base controller
 	$controller('UserController', {$scope: $scope});
 
@@ -151,7 +151,7 @@ angular.module('sokisoki')
 		$location.path('/product/' + event.barcode);
 	};
 
-	var ACTIONS = ssConfig.get('ACTIONS');
+	var ACTIONS = sokiConfig.get('ACTIONS');
 	var history = ssUserUtil.getHistory();
 	history.sort(function(a, b) {
 		return a.date > b.date ? -1 : 1;

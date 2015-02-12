@@ -8,8 +8,8 @@ angular.module('sokisoki')
 		}
 	}])
 
-	.directive('actionIcon', function(ssConfig) {
-		var ACTIONS = ssConfig.get('ACTIONS');
+	.directive('actionIcon', function(sokiConfig) {
+		var ACTIONS = sokiConfig.get('ACTIONS');
 
 		return {
 			restrict: 'A',
@@ -40,7 +40,7 @@ angular.module('sokisoki')
 		}
 	})
 
-	.directive('sokiNavbar', ['$location', 'sokiScanner', 'ssUserUtil', 'sokiBarcode', 'ssConfig', function($location, sokiScanner, ssUserUtil, sokiBarcode, ssConfig) {
+	.directive('sokiNavbar', ['$location', 'sokiScanner', 'ssUserUtil', 'sokiBarcode', 'sokiConfig', function($location, sokiScanner, ssUserUtil, sokiBarcode, sokiConfig) {
 		return {
 			restrict: 'E',
 			scope: {
@@ -48,7 +48,7 @@ angular.module('sokisoki')
 			},
 			templateUrl: 'views/partials/nav.html',
 			link: function(scope, element, attrs) {
-				var ACTIONS = ssConfig.get('ACTIONS');
+				var ACTIONS = sokiConfig.get('ACTIONS');
 				var state = scope.state;
 				if (typeof state == 'undefined') {
 					state = {

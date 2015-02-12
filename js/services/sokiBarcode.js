@@ -1,8 +1,8 @@
 angular
     .module('sokisoki')
-    .factory('sokiBarcode', function($http, ssConfig, ssUserUtil, log) {
-        var API = ssConfig.get('API_ENDPOINT'),
-            ACTIONS = ssConfig.get('ACTIONS');
+    .factory('sokiBarcode', function($http, sokiConfig, ssUserUtil, log) {
+        var API = sokiConfig.get('API_ENDPOINT'),
+            ACTIONS = sokiConfig.get('ACTIONS');
 
         var methods = {},
             _barcode;

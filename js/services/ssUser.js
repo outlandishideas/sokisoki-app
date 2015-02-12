@@ -1,8 +1,8 @@
 angular
     .module('sokisoki')
-    .factory('ssUserUtil', function($q, $http, $location, ssConfig, ssDb, log) {
-        var API = ssConfig.get('API_ENDPOINT');
-        var ACTIONS = ssConfig.get('ACTIONS');
+    .factory('ssUserUtil', function($q, $http, $location, sokiConfig, ssDb, log) {
+        var API = sokiConfig.get('API_ENDPOINT');
+        var ACTIONS = sokiConfig.get('ACTIONS');
 
         var service = {},
             _user = null;

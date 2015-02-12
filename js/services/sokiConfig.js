@@ -29,7 +29,7 @@ angular
             }
         }
     })
-    .factory('ssConfig', function($q, config, log) {
+    .factory('sokiConfig', function($q, config, log) {
         var methods = {},
             _config;
 

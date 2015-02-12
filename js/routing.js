@@ -11,10 +11,10 @@ angular.module('sokisoki')
 				route.resolve = {};
 			}
 
-			route.resolve.getConfig = function($q, ssConfig) {
+			route.resolve.getConfig = function($q, sokiConfig) {
 				var defer = $q.defer();
 
-				ssConfig.load(function(err) {
+				sokiConfig.load(function(err) {
 					if(err) {
 						defer.reject();
 						return;
