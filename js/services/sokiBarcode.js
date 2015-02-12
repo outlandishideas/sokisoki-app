@@ -1,6 +1,6 @@
 angular
     .module('sokisoki')
-    .factory('sokiBarcode', function($http, sokiConfig, sokiUserUtil, log) {
+    .factory('sokiBarcode', function($http, sokiConfig, sokiUserUtil, sokiLogger) {
         var API = sokiConfig.get('API_ENDPOINT'),
             ACTIONS = sokiConfig.get('ACTIONS');
 
@@ -11,11 +11,11 @@ angular
             $http
                 .get(API + '/barcode/' + id)
                 .then(function(res) {
-                    log('barcode ' + id + ' loaded successfully');
+                    sokiLogger.log('barcode ' + id + ' loaded successfully');
                     _barcode = res.data;
                     done(null, _barcode);
                 }, function(err) {
-                    log('barcode ' + id + ' was not loaded: ' + JSON.stringify(err));
+                    sokiLogger.log('barcode ' + id + ' was not loaded: ' + JSON.stringify(err));
                     done(err);
                 });
         };
@@ -45,10 +45,10 @@ angular
                 //todo: make this a POST
                 .get(API + '/barcode/' + id + '/' + action, { params: { user_id: user.user_id, token: user.api_token, metadata: metadata } })
                 .then(function() {
-                    log('action ' + action + ' performed successfully');
+                    sokiLogger.log('action ' + action + ' performed successfully');
                     done(null);
                 }, function(err) {
-                    log('action ' + action + ' was not performed: ' + JSON.stringify(err));
+                    sokiLogger.log('action ' + action + ' was not performed: ' + JSON.stringify(err));
                     done(err);
                 });
         };

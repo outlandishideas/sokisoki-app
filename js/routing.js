@@ -43,6 +43,10 @@ angular.module('sokisoki')
 //	        templateUrl: 'views/home.html',
 //	        controller: 'HomeController'
 //        })
+		.when('/debug/:showMenu', {
+	        templateUrl: 'views/debug.html',
+	        controller: 'DebugController'
+        })
         .when('/history', {
 	        templateUrl: 'views/history.html',
 	        controller: 'HistoryController',
@@ -66,7 +70,7 @@ angular.module('sokisoki')
 	        templateUrl: 'views/product.html',
 	        controller: 'ProductController',
 			resolve: {
-				loadBarcode: function($q, $route, $location, sokiBarcode, ssAppUtil) {
+				loadBarcode: function($q, $route, $location, sokiBarcode, sokiAppUtil) {
 					var defer = $q.defer();
 					var barcode = $route.current.params.barcode;
 
@@ -74,7 +78,7 @@ angular.module('sokisoki')
 						if(err) {
 							defer.reject();
 							$location.path('/history');
-							ssAppUtil.showAlert('Product not found', 'Unrecognised barcode: ' + barcode);
+							sokiAppUtil.showAlert('Product not found', 'Unrecognised barcode: ' + barcode);
 							return;
 						}
 

@@ -8,3 +8,5 @@ phonegap
 adb
 -devices
 -logcat
+
+phonegap android keystore password: KeYSTORE!40k

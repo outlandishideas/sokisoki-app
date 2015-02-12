@@ -1,6 +1,6 @@
 angular
     .module('sokisoki')
-    .factory('sokiEventHandler', function(log) {
+    .factory('sokiEventHandler', function(sokiLogger) {
         var service = {},
             handlers = { backbutton: null };
 

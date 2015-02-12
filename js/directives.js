@@ -107,6 +107,9 @@ angular.module('sokisoki')
 					sokiUserUtil.clearUser();
 					$location.path('/login');
 				};
+				scope.showDebug = function() {
+					changePath('/debug/1');
+				};
 			}
 		}
 	}])

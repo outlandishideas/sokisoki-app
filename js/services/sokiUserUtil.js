@@ -1,6 +1,6 @@
 angular
     .module('sokisoki')
-    .factory('sokiUserUtil', function($q, $http, $location, sokiConfig, ssDb, log) {
+    .factory('sokiUserUtil', function($q, $http, $location, sokiConfig, ssDb, sokiLogger) {
         var API = sokiConfig.get('API_ENDPOINT');
         var ACTIONS = sokiConfig.get('ACTIONS');
 
@@ -21,13 +21,13 @@ angular
                 //todo: make this a POST
                 .get(API + '/user/login', { params: {type: type, id: id, name: name }})
                 .then(function(res) {
-                    log('logged in!');
-                    log(res);
+                    sokiLogger.log('logged in!');
+                    sokiLogger.log(res);
                     setUser(res.data);
                     done(null, _user);
                 }, function(err) {
-                    log('failed to log in');
-                    log(err);
+                    sokiLogger.log('failed to log in');
+                    sokiLogger.log(err);
                     service.clearUser();
                     done(err);
                 });
@@ -52,8 +52,8 @@ angular
                     setUser(_user);
                     done(null, _user);
                 }, function(err) {
-                    log('failed to get history');
-                    log(err);
+                    sokiLogger.log('failed to get history');
+                    sokiLogger.log(err);
                     done(err);
                 });
         };
@@ -84,7 +84,7 @@ angular
         if(typeof cordova == 'undefined') {
             // when running in browser, allow all routes
             service.checkStatus = function(path, route) {
-                console.log(path + ': allowing user through');
+                sokiLogger.log(path + ': allowing user through');
             }
         } else {
             service.checkStatus = function(path) {
@@ -116,7 +116,7 @@ angular
                         break;
                 }
                 if (newPath) {
-                    console.log('cannot access ' + path + ': ' + reason);
+                    sokiLogger.log('cannot access ' + path + ': ' + reason);
                     $location.path(newPath);
                     defer.reject(reason);
                 } else {

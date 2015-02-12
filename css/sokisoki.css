@@ -442,3 +442,39 @@ body, .main-content {
 .share-action .share-action-contents .soki-action {
 	text-align: left;
 }
+
+.page-container.debug {
+	background-color: #333;
+}
+
+.page-container.debug table {
+	color: #fff;
+	font-family: monospace;
+	margin: 0;
+}
+.page-container.debug table .table-col-xl {
+	min-width: 1000px;
+}
+.page-container.debug .scroll-window {
+	max-height: 400px;
+}
+
+.debug-buttons {
+	padding: 10px;
+	text-align: right;
+}
+.debug-buttons .btn {
+	margin-left: 10px;
+}
+
+#debug {
+	font-family: monospace;
+	position: absolute;
+	right: 0;
+	color: #fff;
+	top: 0;
+}
+
+.scroll-window {
+	overflow: auto;
+}

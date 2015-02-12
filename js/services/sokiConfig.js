@@ -33,7 +33,7 @@ angular
             }
         }
     })
-    .factory('sokiConfig', function($q, config, log) {
+    .factory('sokiConfig', function($q, config, sokiLogger) {
         var methods = {},
             _config;
 
@@ -51,7 +51,7 @@ angular
         };
 
         methods.put = function(key, value) {
-            log('! Warning: changes to config will not persist');
+            sokiLogger.log('! Warning: changes to config will not persist');
             config[key] = value;
             return config[key];
         };

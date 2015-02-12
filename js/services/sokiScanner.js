@@ -1,6 +1,6 @@
 angular
 	.module('sokisoki')
-	.factory('sokiScanner', function($timeout, log) {
+	.factory('sokiScanner', function($timeout, sokiLogger) {
 		if (typeof cordova != 'undefined') {
 			return cordova.require("cordova/plugin/BarcodeScanner");
 		}
@@ -10,7 +10,7 @@ angular
 				var barcodes = ['1234', '5060020474859', '0000'];
 				var index = Math.floor(Math.random() * barcodes.length);
 				var barcode = barcodes[index];
-				log('Faking a scan (' + barcode + ')');
+				sokiLogger.log('Faking a scan (' + barcode + ')');
 				if (callback) {
 					$timeout(function() {
 						callback({
