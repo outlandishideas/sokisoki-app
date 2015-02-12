@@ -100,13 +100,27 @@ angular.module('sokisoki')
 		return parseInt(a.seq) - parseInt(b.seq);
 	});
 
+	var history = sokiBarcode.get('history');
+	angular.forEach(history, function(value, key) {
+		value.date = new Date(value.date);
+		if (value.action in _actions) {
+			value.action = _actions[value.action];
+		}
+	});
+	history.sort(function(a, b) {
+		return a.date > b.date ? -1 : 1;
+	});
+
 	$scope.barcode = {
 		code: sokiBarcode.get('barcode'),
 		brand: sokiBarcode.get('brand'),
 		description: sokiBarcode.get('description'),
 		hashtag: sokiBarcode.get('hashtag'),
-		content: content
+		content: content,
+		history: history
 	};
+
+	$scope.performedActions = sokiBarcode.get('user_actions');
 
 	$scope.openUrl = ssAppUtil.openExternalUrl;
 

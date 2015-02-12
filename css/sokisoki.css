@@ -160,28 +160,34 @@ body, .main-content {
 .page-container.history .action-history {
 	margin: 0;
 }
+.page-container.product .action-history-item,
 .page-container.history .action-history-item {
 	border-radius: 0;
 	border-width: 1px 0;
 	padding: 0;
 	color: #333;
 }
+.page-container.product .action-history-item .action-icon,
 .page-container.history .action-history-item .action-icon {
 	display: none;
 }
 
+.page-container.product .action-history-item .details,
 .page-container.history .action-history-item .details {
 	margin-left: 8px;
 	padding: 10px 0 10px 10px;
 	background: #fff;
 }
+.page-container.product .action-history-item .details .action-type,
 .page-container.history .action-history-item .details .action-type {
 	text-transform: uppercase;
 	font-size: 1rem;
 }
+.page-container.product .action-history-item .details .description,
 .page-container.history .action-history-item .details .description {
 	font-size: 2rem;
 }
+.page-container.product .action-history-item .details .date,
 .page-container.history .action-history-item .details .date {
 	font-size: 0.75rem;
 }
@@ -387,4 +393,14 @@ body, .main-content {
 .toast-container .toast-message {
 	line-height: 30px;
 	color: #fff;
+}
+
+.product-history-header {
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #e6e6e6;
+	color: #A0968B;
+	background-color: #f2f2f2;
+	padding: 8px;
+	text-transform: uppercase;
+	font-size: 16px;
 }
