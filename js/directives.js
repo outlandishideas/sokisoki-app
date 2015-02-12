@@ -62,7 +62,7 @@ angular.module('sokisoki')
 				scope.scan = function() {
 					sokiScanner.scan(function(result) {
 						var scanned = result.text;
-						sokiBarcode.doAction(scanned, ACTIONS.scan.present, function() {
+						sokiBarcode.doAction(scanned, ACTIONS.scan.present, {}, function() {
 							//do nothing
 						});
 						scope.$apply(function() {

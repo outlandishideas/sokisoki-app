@@ -120,6 +120,40 @@ angular.module('sokisoki')
 		history: history
 	};
 
+	$scope.share = {
+		action: null,
+		message: '',
+		classes: function() {
+			return $scope.share.action ? $scope.share.action.present + ' open' : 'closed';
+		},
+		show: function(action) {
+			$scope.share.action = action;
+			var msg = $scope.share.action.message;
+			if ($scope.barcode.hashtag) {
+				msg += ' #' + $scope.barcode.hashtag;
+			}
+			$scope.share.message = msg;
+		},
+		hide: function() {
+			$scope.share.action = null;
+			$scope.share.message = '';
+		},
+		send: function() {
+			var action = $scope.share.action;
+			var message = $scope.share.message;
+			$scope.share.hide();
+			if ($scope.toast.promise) {
+				$timeout.cancel($scope.toast.promise);
+			}
+			sokiBarcode.doAction($routeParams.barcode, action.present, {message: message}, function() {
+				$scope.toast.message = action.alert;
+				$scope.toast.action = action.present;
+				$scope.toast.promise = $timeout(function() {
+					$scope.toast.message = '';
+				}, 2000);
+			});
+		}
+	};
 	$scope.performedActions = sokiBarcode.get('user_actions');
 
 	$scope.openUrl = ssAppUtil.openExternalUrl;
@@ -131,16 +165,14 @@ angular.module('sokisoki')
 	};
 
 	$scope.performAction = function(action) {
-		if ($scope.toast.promise) {
-			$timeout.cancel($scope.toast.promise);
+		if ($scope.share.action) {
+			$scope.share.hide();
+			$timeout(function() {
+				$scope.share.show(action);
+			}, 200);
+		} else {
+			$scope.share.show(action);
 		}
-		sokiBarcode.doAction($routeParams.barcode, action.present, function() {
-			$scope.toast.message = action.alert;
-			$scope.toast.action = action.present;
-			$scope.toast.promise = $timeout(function() {
-				$scope.toast.message = '';
-			}, 3000);
-		});
 	};
 })
 

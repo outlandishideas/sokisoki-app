@@ -7,25 +7,29 @@ angular
                 present: 'buy',
                 past: 'bought',
                 label: 'Buy this',
-                alert: 'Bought! (todo)'
+                alert: 'Bought! (todo)',
+                message: 'I bought this #sokisoki'
             },
             love: {
                 present: 'love',
                 past: 'loved',
                 label: 'Love this',
-                alert: 'Loved! (todo)'
+                alert: 'Loved! (todo)',
+                message: 'I loved this #sokisoki'
             },
             scan: {
                 present: 'scan',
                 past: 'scanned',
                 label: 'Scanned this',
-                alert: 'Scanned! (todo)'
+                alert: 'Scanned! (todo)',
+                message: 'I scanned this #sokisoki'
             },
             want: {
                 present: 'want',
                 past: 'wanted',
                 label: 'Wish list',
-                alert: 'Added to wish list! (todo)'
+                alert: 'Added to wish list! (todo)',
+                message: 'I added this to my wishlist #sokisoki'
             }
         }
     })

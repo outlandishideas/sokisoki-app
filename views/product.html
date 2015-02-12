@@ -45,6 +45,18 @@
 		</div>
 	</div>
 	<div class="anchor-bottom product-actions">
+		<div class="share-action" ng-class="share.classes()">
+			<div class="share-action-contents">
+				<div ng-if="share.action" class="soki-action action-{{share.action.present}}">
+					<div action-icon="share.action"></div>
+				</div>
+				<textarea name="share_message" ng-model="share.message" ng-max-length="140"></textarea>
+				<div>
+					<button type="button" ng-click="share.send()" class="btn btn-info">Send!</button>
+					<button type="button" ng-click="share.hide()" class="btn btn-default">Cancel</button>
+				</div>
+			</div>
+		</div>
 		<div class="toast-container" ng-class="toast.classes()">
 			<span class="toast-message">{{ toast.message }}</span>
 		</div>

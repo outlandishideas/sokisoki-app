@@ -28,9 +28,10 @@ angular
          * Perform an action on a Barcode.
          * @param id id of barcode (optional)
          * @param action action to perform
+         * @param metadata hashmap of additional metadata
          * @param done callback
          */
-        methods.doAction = function(id, action, done) {
+        methods.doAction = function(id, action, metadata, done) {
             done = done || function() { };
 
             if(!action in ACTIONS) {
@@ -42,7 +43,7 @@ angular
 
             $http
                 //todo: make this a POST
-                .get(API + '/barcode/' + id + '/' + action, { params: { user_id: user.user_id, token: user.api_token}})
+                .get(API + '/barcode/' + id + '/' + action, { params: { user_id: user.user_id, token: user.api_token, metadata: metadata } })
                 .then(function() {
                     log('action ' + action + ' performed successfully');
                     done(null);
