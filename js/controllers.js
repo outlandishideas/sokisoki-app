@@ -160,7 +160,7 @@ angular.module('sokisoki')
 	$scope.history = history;
 })
 
-.controller('LoginController', function($scope, $rootScope, ssFacebook, ssTwitter, ssUserUtil, $location, ssAppUtil, sokiEventHandler, log) {
+.controller('LoginController', function($scope, $rootScope, sokiFacebook, ssTwitter, ssUserUtil, $location, ssAppUtil, sokiEventHandler, log) {
 	sokiEventHandler.setBackButtonHandler(function(event) {
 		ssAppUtil.exit();
 	});
@@ -187,7 +187,7 @@ angular.module('sokisoki')
 
 	$scope.facebookLogin = function() {
 		$scope.signingIn = true;
-		ssFacebook.login()
+		sokiFacebook.login()
 			.then(function(data) {
 				log(data);
 				ssUserUtil.login('facebook', data.id, data.name, signInCallback);

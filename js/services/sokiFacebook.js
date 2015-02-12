@@ -1,6 +1,6 @@
 angular
     .module('sokisoki')
-    .factory('ssFacebook', ['$q', function($q) {
+    .factory('sokiFacebook', ['$q', function($q) {
         return {
             login: function() {
                 var q = $q.defer();
