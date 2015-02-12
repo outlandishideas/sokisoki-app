@@ -160,7 +160,7 @@ angular.module('sokisoki')
 	$scope.history = history;
 })
 
-.controller('LoginController', function($scope, $rootScope, sokiFacebook, ssTwitter, ssUserUtil, $location, ssAppUtil, sokiEventHandler, log) {
+.controller('LoginController', function($scope, $rootScope, sokiFacebook, sokiTwitter, ssUserUtil, $location, ssAppUtil, sokiEventHandler, log) {
 	sokiEventHandler.setBackButtonHandler(function(event) {
 		ssAppUtil.exit();
 	});
@@ -200,7 +200,7 @@ angular.module('sokisoki')
 
 	$scope.twitterLogin = function() {
 		$scope.signingIn = true;
-		ssTwitter.login()
+		sokiTwitter.login()
 			.then(function(data) {
 				ssUserUtil.login('twitter', data.id_str, data.screen_name, signInCallback);
 			}, function(data) {

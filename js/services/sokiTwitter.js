@@ -1,6 +1,6 @@
 angular
     .module('sokisoki')
-    .factory('ssTwitter', ['$q', '$rootScope', 'ssOauth', function($q, $rootScope, ssOauth) {
+    .factory('sokiTwitter', ['$q', '$rootScope', 'ssOauth', function($q, $rootScope, ssOauth) {
         if (typeof cordova == 'undefined') {
             return {
                 login: function() {
