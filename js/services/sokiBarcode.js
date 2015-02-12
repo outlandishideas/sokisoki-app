@@ -1,6 +1,6 @@
 angular
     .module('sokisoki')
-    .factory('sokiBarcode', function($http, sokiConfig, ssUserUtil, log) {
+    .factory('sokiBarcode', function($http, sokiConfig, sokiUserUtil, log) {
         var API = sokiConfig.get('API_ENDPOINT'),
             ACTIONS = sokiConfig.get('ACTIONS');
 
@@ -38,7 +38,7 @@ angular
                 return;
             }
 
-            var user = ssUserUtil.get();
+            var user = sokiUserUtil.get();
 
             $http
                 //todo: make this a POST

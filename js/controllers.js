@@ -3,16 +3,16 @@
 /* Controllers */
 angular.module('sokisoki')
 
-.controller('OnboardController', function($scope, $rootScope, $location, ssUserUtil, sokiEventHandler) {
+.controller('OnboardController', function($scope, $rootScope, $location, sokiUserUtil, sokiEventHandler) {
 		sokiEventHandler.setBackButtonHandler(function(event) {
 		$rootScope.$apply(function() {
-			ssUserUtil.setOnboarded();
+			sokiUserUtil.setOnboarded();
 			$location.path('/history');
 		});
 	});
 
 	$scope.finished = function() {
-		ssUserUtil.setOnboarded();
+		sokiUserUtil.setOnboarded();
 		$location.path('/history');
 	};
 
@@ -41,7 +41,7 @@ angular.module('sokisoki')
 })
 
 // base controller for all logged-in screens
-.controller('UserController', function($scope, $rootScope, $location, sokiScanner, ssUserUtil, sokiEventHandler, ssAppUtil) {
+.controller('UserController', function($scope, $rootScope, $location, sokiScanner, sokiUserUtil, sokiEventHandler, ssAppUtil) {
 		sokiEventHandler.setBackButtonHandler(function(event) {
 		$scope.$apply(function() {
 			if (!$scope.menuState || !$scope.menuState.toggleMenu(false)) {
@@ -130,7 +130,7 @@ angular.module('sokisoki')
 	};
 })
 
-.controller('HistoryController', function($scope, $rootScope, $location, $controller, sokiEventHandler, ssAppUtil, ssUserUtil, sokiConfig) {
+.controller('HistoryController', function($scope, $rootScope, $location, $controller, sokiEventHandler, ssAppUtil, sokiUserUtil, sokiConfig) {
 	// call base controller
 	$controller('UserController', {$scope: $scope});
 
@@ -152,7 +152,7 @@ angular.module('sokisoki')
 	};
 
 	var ACTIONS = sokiConfig.get('ACTIONS');
-	var history = ssUserUtil.getHistory();
+	var history = sokiUserUtil.getHistory();
 	history.sort(function(a, b) {
 		return a.date > b.date ? -1 : 1;
 	});
@@ -160,7 +160,7 @@ angular.module('sokisoki')
 	$scope.history = history;
 })
 
-.controller('LoginController', function($scope, $rootScope, sokiFacebook, sokiTwitter, ssUserUtil, $location, ssAppUtil, sokiEventHandler, log) {
+.controller('LoginController', function($scope, $rootScope, sokiFacebook, sokiTwitter, sokiUserUtil, $location, ssAppUtil, sokiEventHandler, log) {
 	sokiEventHandler.setBackButtonHandler(function(event) {
 		ssAppUtil.exit();
 	});
@@ -190,7 +190,7 @@ angular.module('sokisoki')
 		sokiFacebook.login()
 			.then(function(data) {
 				log(data);
-				ssUserUtil.login('facebook', data.id, data.name, signInCallback);
+				sokiUserUtil.login('facebook', data.id, data.name, signInCallback);
 			}, function(data) {
 				log('error signing in to facebook');
 				log(data);
@@ -202,7 +202,7 @@ angular.module('sokisoki')
 		$scope.signingIn = true;
 		sokiTwitter.login()
 			.then(function(data) {
-				ssUserUtil.login('twitter', data.id_str, data.screen_name, signInCallback);
+				sokiUserUtil.login('twitter', data.id_str, data.screen_name, signInCallback);
 			}, function(data) {
 				console.log('error signing in to twitter');
 				$scope.signingIn = false;

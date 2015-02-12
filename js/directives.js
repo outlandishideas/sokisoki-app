@@ -40,7 +40,7 @@ angular.module('sokisoki')
 		}
 	})
 
-	.directive('sokiNavbar', ['$location', 'sokiScanner', 'ssUserUtil', 'sokiBarcode', 'sokiConfig', function($location, sokiScanner, ssUserUtil, sokiBarcode, sokiConfig) {
+	.directive('sokiNavbar', ['$location', 'sokiScanner', 'sokiUserUtil', 'sokiBarcode', 'sokiConfig', function($location, sokiScanner, sokiUserUtil, sokiBarcode, sokiConfig) {
 		return {
 			restrict: 'E',
 			scope: {
@@ -104,7 +104,7 @@ angular.module('sokisoki')
 				};
 				scope.signOut = function() {
 					scope.toggleMenu(false, 'sign out');
-					ssUserUtil.clearUser();
+					sokiUserUtil.clearUser();
 					$location.path('/login');
 				};
 			}

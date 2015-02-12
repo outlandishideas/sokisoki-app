@@ -24,8 +24,8 @@ angular.module('sokisoki')
 				});
 			};
 
-			route.resolve.checkLogin = function(ssUserUtil) {
-				return ssUserUtil.checkStatus(path);
+			route.resolve.checkLogin = function(sokiUserUtil) {
+				return sokiUserUtil.checkStatus(path);
 			};
 
 			originalWhen.call($routeProvider, path, route);
@@ -47,10 +47,10 @@ angular.module('sokisoki')
 	        templateUrl: 'views/history.html',
 	        controller: 'HistoryController',
 	        resolve: {
-		        loadHistory: function($q, ssUserUtil) {
+		        loadHistory: function($q, sokiUserUtil) {
 			        var defer = $q.defer();
 
-			        ssUserUtil.updateHistory(function(err) {
+			        sokiUserUtil.updateHistory(function(err) {
 				        defer.resolve();
 			        });
 
