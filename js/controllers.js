@@ -3,8 +3,8 @@
 /* Controllers */
 angular.module('sokisoki')
 
-.controller('OnboardController', function($scope, $rootScope, $location, ssUserUtil, ssEventHandler) {
-	ssEventHandler.setBackButtonHandler(function(event) {
+.controller('OnboardController', function($scope, $rootScope, $location, ssUserUtil, sokiEventHandler) {
+		sokiEventHandler.setBackButtonHandler(function(event) {
 		$rootScope.$apply(function() {
 			ssUserUtil.setOnboarded();
 			$location.path('/history');
@@ -41,8 +41,8 @@ angular.module('sokisoki')
 })
 
 // base controller for all logged-in screens
-.controller('UserController', function($scope, $rootScope, $location, sokiScanner, ssUserUtil, ssEventHandler, ssAppUtil) {
-	ssEventHandler.setBackButtonHandler(function(event) {
+.controller('UserController', function($scope, $rootScope, $location, sokiScanner, ssUserUtil, sokiEventHandler, ssAppUtil) {
+		sokiEventHandler.setBackButtonHandler(function(event) {
 		$scope.$apply(function() {
 			if (!$scope.menuState || !$scope.menuState.toggleMenu(false)) {
 				$location.path('/history');
@@ -76,7 +76,7 @@ angular.module('sokisoki')
 	};
 })
 
-.controller('ProductController', function($scope, $rootScope, $controller, $location, $routeParams, ssEventHandler, $timeout, sokiBarcode, sokiConfig, ssAppUtil) {
+.controller('ProductController', function($scope, $rootScope, $controller, $location, $routeParams, sokiEventHandler, $timeout, sokiBarcode, sokiConfig, ssAppUtil) {
 	var _actions = sokiConfig.get('ACTIONS');
 
 	// call base controller
@@ -130,7 +130,7 @@ angular.module('sokisoki')
 	};
 })
 
-.controller('HistoryController', function($scope, $rootScope, $location, $controller, ssEventHandler, ssAppUtil, ssUserUtil, sokiConfig) {
+.controller('HistoryController', function($scope, $rootScope, $location, $controller, sokiEventHandler, ssAppUtil, ssUserUtil, sokiConfig) {
 	// call base controller
 	$controller('UserController', {$scope: $scope});
 
@@ -139,7 +139,7 @@ angular.module('sokisoki')
 		show: false
 	};
 
-	ssEventHandler.setBackButtonHandler(function(event) {
+		sokiEventHandler.setBackButtonHandler(function(event) {
 		$scope.$apply(function() {
 			if (!$scope.menuState.toggleMenu(false)) {
 				ssAppUtil.exit();
@@ -160,8 +160,8 @@ angular.module('sokisoki')
 	$scope.history = history;
 })
 
-.controller('LoginController', function($scope, $rootScope, ssFacebook, ssTwitter, ssUserUtil, $location, ssAppUtil, ssEventHandler, log) {
-	ssEventHandler.setBackButtonHandler(function(event) {
+.controller('LoginController', function($scope, $rootScope, ssFacebook, ssTwitter, ssUserUtil, $location, ssAppUtil, sokiEventHandler, log) {
+	sokiEventHandler.setBackButtonHandler(function(event) {
 		ssAppUtil.exit();
 	});
 

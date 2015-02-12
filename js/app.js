@@ -16,9 +16,9 @@ angular.module('sokisoki', ['ngTouch', 'ngRoute', 'ngCordova', 'ui.bootstrap'])
 //        $compileProvider.urlSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
 //    })
 
-	.run(['$rootScope', 'ssEventHandler', function ($rootScope, ssEventHandler) {
+	.run(['$rootScope', 'sokiEventHandler', function ($rootScope, sokiEventHandler) {
 		$rootScope.$on('$routeChangeStart', function (event) {
-			ssEventHandler.clearBackButtonHandler();
+			sokiEventHandler.clearBackButtonHandler();
 		});
 	}])
 
