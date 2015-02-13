@@ -55,7 +55,6 @@ angular
                     }
                     _user.history = history;
                     sokiLogger.log('setting user');
-                    sokiLogger.log(_user);
                     setUser(_user);
                     sokiLogger.log('history done');
                     done(null, _user);

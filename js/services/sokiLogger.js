@@ -50,7 +50,6 @@ angular
 					console.log('SOKI_DEBUG: ' + msg);
 				}
 			} catch (ex) {
-				sokiAppUtil.showAlert(ex.message, JSON.stringify(ex));
 				sokiAppUtil.showAlert(typeof msg, msg);
 			}
 		};
