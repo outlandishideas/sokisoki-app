@@ -48,16 +48,13 @@ angular
                     var history = res.data.history;
                     for (var i=0; i<history.length; i++) {
                         var item = history[i];
-                        sokiLogger.log(item.action + ' ' + item.date);
                         if (item.action in ACTIONS) {
                             item.action = ACTIONS[item.action];
                         }
                         item.date = sokiAppUtil.parseDate(item.date);
                     }
                     _user.history = history;
-                    sokiLogger.log('setting user');
                     setUser(_user);
-                    sokiLogger.log('history done');
                     done(null, _user);
                 }, function(err) {
                     sokiLogger.log('failed to get history');
