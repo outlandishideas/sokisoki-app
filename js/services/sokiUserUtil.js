@@ -47,8 +47,8 @@ angular
                     sokiLogger.log(res);
                     var history = res.data.history;
                     for (var i=0; i<history.length; i++) {
-                        sokiLogger.log(item.action + ' ' + item.date);
                         var item = history[i];
+                        sokiLogger.log(item.action + ' ' + item.date);
                         if (item.action in ACTIONS) {
                             item.action = ACTIONS[item.action];
                         }
