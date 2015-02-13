@@ -35,6 +35,7 @@ angular
 
         service.updateHistory = function(done) {
             if (!_user) {
+                done(null, _user);
                 return;
             }
             $http
