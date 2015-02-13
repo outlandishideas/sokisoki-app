@@ -17,6 +17,7 @@ angular
         };
 
         service.login = function(type, id, name, done) {
+            sokiLogger.log('Logging in to sokisoki');
             $http
                 //todo: make this a POST
                 .get(API + '/user/login', { params: {type: type, id: id, name: name }})
@@ -34,6 +35,7 @@ angular
         };
 
         service.updateHistory = function(done) {
+            sokiLogger.log('Updating history');
             if (!_user) {
                 done(null, _user);
                 return;
@@ -41,6 +43,8 @@ angular
             $http
                 .get(API + '/user/' + _user.user_id + '/history', {params: { token: _user.api_token }})
                 .then(function(res) {
+                    sokiLogger.log('Got history');
+                    sokiLogger.log(res);
                     var history = res.data.history;
                     for (var i=0; i<history.length; i++) {
                         var item = history[i];

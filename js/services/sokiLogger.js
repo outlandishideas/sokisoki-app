@@ -43,8 +43,8 @@ angular
 				} else {
 					_service.logs.unshift({
 						date: new Date(),
-						file: 'unknown',
-						line: '?',
+						file: '',
+						line: '',
 						msg: msg
 					});
 					console.log('SOKI_DEBUG: ' + msg);
