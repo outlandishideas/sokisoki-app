@@ -51,6 +51,7 @@ angular
 				}
 			} catch (ex) {
 				sokiAppUtil.showAlert(ex.message, JSON.stringify(ex));
+				sokiAppUtil.showAlert(typeof msg, msg);
 			}
 		};
 
