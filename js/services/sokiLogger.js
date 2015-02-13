@@ -39,8 +39,8 @@ angular
 						break;
 					}
 				}
-			} catch (e) {
-				sokiAppUtil.showAlert('error', msg);
+			} catch (ex) {
+				sokiAppUtil.showAlert('Error', ex);
 			}
 		};
 
