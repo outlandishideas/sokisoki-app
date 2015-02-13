@@ -96,7 +96,7 @@ angular.module('sokisoki')
 //        $routeProvider.when('/view1', {
 //	        templateUrl: 'partials/notificationView.html'
 //        });
-        .otherwise({redirectTo: '/history'});
+        .otherwise({redirectTo: '/login'});
 	})
 
 ;
