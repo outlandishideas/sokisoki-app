@@ -25,6 +25,14 @@ angular
 			},
 			oauth: function() {
 				return window.OAuth;
+			},
+			parseDate: function(dateString) {
+				var regex = /([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2}):([0-9]{2})/g;
+				var m = regex.exec(dateString);
+				if (m && m.length == 7) {
+					return new Date(m[2] + '/' + m[3] + '/' + m[1] + ', ' + m[4] + ':' + m[5] + ':' + m[6]);
+				}
+				return null;
 			}
 		};
 	})

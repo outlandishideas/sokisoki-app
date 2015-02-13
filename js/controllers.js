@@ -102,7 +102,7 @@ angular.module('sokisoki')
 
 	var history = sokiBarcode.get('history');
 	angular.forEach(history, function(value, key) {
-		value.date = new Date(value.date);
+		value.date = sokiAppUtil.parseDate(value.date);
 		if (value.action in _actions) {
 			value.action = _actions[value.action];
 		}

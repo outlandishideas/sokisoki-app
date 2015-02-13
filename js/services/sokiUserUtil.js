@@ -1,6 +1,6 @@
 angular
     .module('sokisoki')
-    .factory('sokiUserUtil', function($q, $http, $location, sokiConfig, ssDb, sokiLogger) {
+    .factory('sokiUserUtil', function($q, $http, $location, sokiConfig, ssDb, sokiLogger, sokiAppUtil) {
         var API = sokiConfig.get('API_ENDPOINT');
         var ACTIONS = sokiConfig.get('ACTIONS');
 
@@ -47,11 +47,12 @@ angular
                     sokiLogger.log(res);
                     var history = res.data.history;
                     for (var i=0; i<history.length; i++) {
+                        sokiLogger.log(item.action + ' ' + item.date);
                         var item = history[i];
                         if (item.action in ACTIONS) {
                             item.action = ACTIONS[item.action];
                         }
-                        item.date = new Date(item.date);
+                        item.date = sokiAppUtil.parseDate(item.date);
                     }
                     _user.history = history;
                     sokiLogger.log('setting user');
