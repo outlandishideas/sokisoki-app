@@ -17,7 +17,7 @@ angular.module('sokisoki', ['ngTouch', 'ngRoute', 'ngCordova', 'ui.bootstrap'])
 //    })
 
 	.run(['$rootScope', 'sokiEventHandler', function ($rootScope, sokiEventHandler) {
-		if (StatusBar && StatusBar.hide) {
+		if (typeof StatusBar != 'undefined' && StatusBar.hide) {
 			StatusBar.hide();
 		}
 		$rootScope.$on('$routeChangeStart', function (event) {
