@@ -40,7 +40,7 @@ angular
 					}
 				}
 			} catch (ex) {
-				sokiAppUtil.showAlert('Error', ex);
+				sokiAppUtil.showAlert('Error', ex.message);
 			}
 		};
 
