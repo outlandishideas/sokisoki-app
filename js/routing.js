@@ -51,10 +51,11 @@ angular.module('sokisoki')
 	        templateUrl: 'views/history.html',
 	        controller: 'HistoryController',
 	        resolve: {
-		        loadHistory: function($q, sokiUserUtil) {
+		        loadHistory: function($q, sokiUserUtil, sokiLogger) {
 			        var defer = $q.defer();
 
 			        sokiUserUtil.updateHistory(function(err) {
+				        sokiLogger.log('finished updating history');
 				        defer.resolve();
 			        });
 

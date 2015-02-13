@@ -54,7 +54,10 @@ angular
                         item.date = new Date(item.date);
                     }
                     _user.history = history;
+                    sokiLogger.log('setting user');
+                    sokiLogger.log(_user);
                     setUser(_user);
+                    sokiLogger.log('history done');
                     done(null, _user);
                 }, function(err) {
                     sokiLogger.log('failed to get history');

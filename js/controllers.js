@@ -176,7 +176,8 @@ angular.module('sokisoki')
 	};
 })
 
-.controller('HistoryController', function($scope, $rootScope, $location, $controller, sokiEventHandler, sokiAppUtil, sokiUserUtil, sokiConfig) {
+.controller('HistoryController', function($scope, $rootScope, $location, $controller, sokiEventHandler, sokiAppUtil, sokiUserUtil, sokiConfig, sokiLogger) {
+	sokiLogger.log('In history controller');
 	// call base controller
 	$controller('UserController', {$scope: $scope});
 
@@ -204,6 +205,7 @@ angular.module('sokisoki')
 	});
 
 	$scope.history = history;
+	sokiLogger.log('Finished history controller setup');
 })
 
 .controller('LoginController', function($scope, $rootScope, sokiFacebook, sokiTwitter, sokiUserUtil, $location, sokiAppUtil, sokiEventHandler, sokiLogger) {
@@ -263,7 +265,7 @@ angular.module('sokisoki')
 	};
 })
 
-.controller('DebugController', function($scope, $location, $routeParams, sokiLogger) {
+.controller('DebugController', function($scope, $location, $routeParams, sokiLogger, sokiUserUtil) {
 	if ($routeParams.showMenu == '1') {
 		$scope.menuState = {
 			title: 'Debug',
@@ -282,8 +284,12 @@ angular.module('sokisoki')
 	$scope.testLog = function() {
 		sokiLogger.log('Testing');
 	};
-	$scope.login = function() {
-		$location.path('/login');
+	$scope.back = function() {
+		if (sokiUserUtil.get()) {
+			$location.path('/history');
+		} else {
+			$location.path('/login');
+		}
 	};
 })
 ;
