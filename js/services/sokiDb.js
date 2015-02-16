@@ -1,9 +1,6 @@
-'use strict';
-
 angular
 	.module('sokisoki')
-
-	.factory('ssDb', function() {
+	.factory('sokiDb', function() {
 		var db = window.localStorage;
 		return {
 			get: function(key) {

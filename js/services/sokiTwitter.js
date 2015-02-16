@@ -1,20 +1,10 @@
 angular
     .module('sokisoki')
     .factory('sokiTwitter', ['$q', '$rootScope', 'sokiLogger', 'sokiAppUtil', function($q, $rootScope, sokiLogger, sokiAppUtil) {
-        if (typeof cordova == 'undefined') {
-            return {
-                login: function() {
-                    var q = $q.defer();
-                    q.resolve({id_str: '12349876', 'screen_name': 'rasmuswinter'});
-                    return q.promise;
-                }
-            }
-        }
-
         var oauthOptions = {
             consumerKey: 'e7zQ94khCDqEmOkT2Gluiu1OB', // YOUR Twitter CONSUMER_KEY
             consumerSecret: 'vYGYsD0yAVgfzxvrtnKmHxTkoCo4jtCsauxOSV02XYnR8slGKg', // YOUR Twitter CONSUMER_SECRET
-            callbackUrl: "http://localhost" //this doesn't matter, as anything going here is intercepted
+            callbackUrl: "https://sokisoki.com" //this doesn't matter, as anything going here is intercepted
         };
 
         var currentData = {
@@ -94,18 +84,55 @@ angular
         };
 
         var oauth = sokiAppUtil.oauth();
-        return {
-            login: function() {
+        var service = {};
+
+        if (typeof cordova == 'undefined') {
+            service.login = function() {
+                var q = $q.defer();
+                q.resolve({id_str: '12349876', 'screen_name': 'rasmuswinter'});
+                return q.promise;
+            };
+            service.getAccessToken = function() {
+                return {
+                    key: 'abc1',
+                    secret: 'def1'
+                };
+            };
+        } else {
+            service.login = function () {
                 if (currentData.deferred) {
                     currentData.deferred.reject('started again');
                 }
                 currentData.deferred = $q.defer();
                 currentData.requestParams = null;
                 currentData.oauth = oauth(oauthOptions);
-                currentData.oauth.get('https://api.twitter.com/oauth/request_token', promptForLogin, function(data) {
+                currentData.oauth.get('https://api.twitter.com/oauth/request_token', promptForLogin, function (data) {
                     onError(data.text, 'request_token');
                 });
                 return currentData.deferred.promise;
-            }
+            };
+            service.getAccessToken = function() {
+                return {
+                    key: currentData.oauth.getAccessTokenKey(),
+                    secret: currentData.oauth.getAccessTokenSecret()
+                };
+            };
+        }
+
+        service.share = function(message, accessData) {
+            sokiLogger.log('Sharing on twitter: ' + message);
+            var oa = oauth(oauthOptions);
+            oa.setAccessToken(accessData.key, accessData.secret);
+            oa.post('https://api.twitter.com/1.1/statuses/update.json', {status: message},
+                function(res) {
+                    sokiLogger.log('success');
+                    sokiLogger.log(res);
+                },
+                function(err) {
+                    sokiLogger.log('failure');
+                    sokiLogger.log(err);
+                }
+            );
         };
+        return service;
     }]);

@@ -29,6 +29,8 @@ angular.module('sokisoki', ['ngTouch', 'ngRoute', 'ngCordova', 'ui.bootstrap'])
 		$sceDelegateProvider.resourceUrlWhitelist([
 			'self',
 			'http://sokisoki.com/**',
+			'http://api.twitter.com/**',
+			'https://api.twitter.com/**',
 			'http://www.sokisoki.com/**',
 			'http://www.youtube.com/**',
 			'https://www.youtube.com/**'

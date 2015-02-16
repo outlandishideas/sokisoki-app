@@ -1,6 +1,6 @@
 angular
     .module('sokisoki')
-    .factory('sokiUserUtil', function($q, $http, $location, sokiConfig, ssDb, sokiLogger, sokiAppUtil) {
+    .factory('sokiUserUtil', function($q, $http, $location, sokiConfig, sokiDb, sokiLogger, sokiAppUtil) {
         var API = sokiConfig.get('API_ENDPOINT');
         var ACTIONS = sokiConfig.get('ACTIONS');
 
@@ -13,10 +13,10 @@ angular
 
         var setUser = function(user) {
             _user = user;
-            ssDb.set('user', _user);
+            sokiDb.set('user', _user);
         };
 
-        service.login = function(type, id, name, done) {
+        service.login = function(type, id, name, accessData, done) {
             sokiLogger.log('Logging in to sokisoki');
             $http
                 //todo: make this a POST
@@ -24,7 +24,10 @@ angular
                 .then(function(res) {
                     sokiLogger.log('logged in!');
                     sokiLogger.log(res);
-                    setUser(res.data);
+                    var userData = res.data;
+                    userData.userType = type;
+                    userData.accessData = accessData;
+                    setUser(userData);
                     done(null, _user);
                 }, function(err) {
                     sokiLogger.log('failed to log in');
@@ -65,7 +68,7 @@ angular
 
         service.clearUser = function() {
             _user = null;
-            ssDb.set('user', _user);
+            sokiDb.set('user', _user);
         };
 
         service.getHistory = function() {
@@ -78,7 +81,7 @@ angular
 
         service.setOnboarded = function() {
             _user.onboarded = true;
-            ssDb.set('user', _user);
+            sokiDb.set('user', _user);
 
             $http
                 //todo: make this a POST
@@ -131,7 +134,7 @@ angular
             };
         }
 
-        _user = ssDb.get('user');
+        _user = sokiDb.get('user');
         if (!_user) {
             service.clearUser();
         }

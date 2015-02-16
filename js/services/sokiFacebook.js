@@ -1,6 +1,6 @@
 angular
     .module('sokisoki')
-    .factory('sokiFacebook', ['$q', function($q) {
+    .factory('sokiFacebook', ['$q', function($q, sokiLogger) {
         return {
             login: function() {
                 var q = $q.defer();
@@ -24,6 +24,11 @@ angular
                     });
 
                 return q.promise;
+            },
+            share: function(message, accessData) {
+                //todo
+                sokiLogger.log('Sharing on facebook: ' + message);
+                sokiLogger.log(accessData);
             }
         };
     }]);

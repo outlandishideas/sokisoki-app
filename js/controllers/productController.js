@@ -3,7 +3,8 @@
 /* Controllers */
 angular.module('sokisoki')
 
-.controller('ProductController', function($scope, $rootScope, $controller, $location, $routeParams, sokiEventHandler, $timeout, sokiBarcode, sokiConfig, sokiAppUtil) {
+.controller('ProductController', function($scope, $rootScope, $controller, $location, $routeParams, $timeout,
+                                          sokiEventHandler, sokiBarcode, sokiConfig, sokiAppUtil, sokiUserUtil, sokiTwitter, sokiFacebook) {
 	var _actions = sokiConfig.get('ACTIONS');
 
 	// call base controller
@@ -72,6 +73,17 @@ angular.module('sokisoki')
 			if ($scope.toast.promise) {
 				$timeout.cancel($scope.toast.promise);
 			}
+			var user = sokiUserUtil.get();
+			var sharer = null;
+			if (user.userType == 'facebook') {
+				sharer = sokiFacebook.share;
+			} else if (user.userType == 'twitter') {
+				sharer = sokiTwitter.share;
+			}
+			if (sharer) {
+				sharer(message, user.accessData);
+			}
+
 			sokiBarcode.doAction($routeParams.barcode, action.present, {message: message}, function() {
 				$scope.toast.message = action.alert;
 				$scope.toast.action = action.present;

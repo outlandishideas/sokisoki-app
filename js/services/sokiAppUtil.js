@@ -24,6 +24,8 @@ angular
 				}
 			},
 			oauth: function() {
+				// taken from https://github.com/bytespider/jsOAuth
+				// see http://bytespider.github.io/jsOAuth/api-reference/ for references
 				return window.OAuth;
 			},
 			parseDate: function(dateString) {
