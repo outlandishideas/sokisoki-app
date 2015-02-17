@@ -19,7 +19,7 @@ angular
 					msg = JSON.stringify(msg);
 				}
 				var e = new Error('dummy');
-				if (e.stack) {
+				if (typeof e.stack != 'undefined') {
 					var stack = e.stack.replace(/^[^\(]+?[\n$]/gm, '')
 						.replace(/^\s+at\s+/gm, '')
 						.replace(/^Object.<anonymous>\s*\(/gm, '{anonymous}()@')
@@ -50,7 +50,7 @@ angular
 					console.log('SOKI_DEBUG: ' + msg);
 				}
 			} catch (ex) {
-				sokiAppUtil.showAlert(typeof msg, msg);
+				sokiAppUtil.showAlert(typeof msg, msg + "\n\n" + JSON.stringify(ex));
 			}
 		};
 

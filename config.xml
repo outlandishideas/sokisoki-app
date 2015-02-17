@@ -41,6 +41,7 @@
     <preference name="disable-cursor" value="false" />
     <preference name="android-minSdkVersion" value="7" />
     <preference name="android-installLocation" value="auto" />
+    <preference name="android-windowSoftInputMode" value="stateVisible|adjustResize" />
 	<preference name="SplashScreen" value="screen" />
     <preference name="StatusBarOverlaysWebView" value="false" />
 
@@ -72,21 +73,20 @@
 	<!--<gap:plugin name="com.phonegap.plugins.childbrowser" version="5.0.0" />-->
 
 	<!-- generic icon and splash -->
-    <icon src="www/res/icon/icon.png" />
+    <icon src="icon.png" />
 	<splash src="www/res/screen/screen.png" />
 
 	<!-- device-specific icons -->
-	<platform name="android">
-		<icon src="www/res/icon/android/icon-ldpi.png" density="ldpi" />
-		<icon src="www/res/icon/android/icon-mdpi.png" density="mdpi" />
-		<icon src="www/res/icon/android/icon-hdpi.png" density="hdpi" />
-		<icon src="www/res/icon/android/icon-xhdpi.png" density="xhdpi" />
+    <icon src="icon-android-ldpi.png" density="ldpi" />
+    <icon src="icon-android-mdpi.png" density="mdpi" />
+    <icon src="icon-android-hdpi.png" density="hdpi" />
+    <icon src="icon-android-xhdpi.png" density="xhdpi" />
 
-		<splash src="www/res/screen/android/screen.9.png" density="ldpi" />
-		<splash src="www/res/screen/android/screen.9.png" density="mdpi" />
-		<splash src="www/res/screen/android/screen.9.png" density="hdpi" />
-		<splash src="www/res/screen/android/screen.9.png" density="xhdpi" />
-	</platform>
+    <splash src="www/res/screen/android/screen.9.png" density="ldpi" />
+    <splash src="www/res/screen/android/screen.9.png" density="mdpi" />
+    <splash src="www/res/screen/android/screen.9.png" density="hdpi" />
+    <splash src="www/res/screen/android/screen.9.png" density="xhdpi" />
+
     <!--<icon gap:platform="blackberry" src="www/res/icon/blackberry/icon-80.png" />-->
     <!--<icon gap:platform="blackberry" gap:state="hover" src="www/res/icon/blackberry/icon-80.png" />-->
     <!--<icon gap:platform="ios" height="57" src="www/res/icon/ios/icon-57.png" width="57" />-->
