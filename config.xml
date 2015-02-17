@@ -36,13 +36,14 @@
     <preference name="ios-statusbarstyle" value="black-opaque" />
     <preference name="detect-data-types" value="true" />
     <preference name="exit-on-suspend" value="true" />
-    <preference name="show-splash-screen-spinner" value="true" />
-    <preference name="auto-hide-splash-screen" value="true" />
+    <!--<preference name="show-splash-screen-spinner" value="true" />-->
+    <!--<preference name="auto-hide-splash-screen" value="true" />-->
     <preference name="disable-cursor" value="false" />
     <preference name="android-minSdkVersion" value="7" />
     <preference name="android-installLocation" value="auto" />
     <preference name="android-windowSoftInputMode" value="stateVisible|adjustResize" />
 	<preference name="SplashScreen" value="screen" />
+    <preference name="SplashScreenDelay" value="1000" />
     <preference name="StatusBarOverlaysWebView" value="false" />
 
     <!--<gap:plugin name="org.apache.cordova.battery-status" />-->
@@ -61,7 +62,7 @@
     <gap:plugin name="org.apache.cordova.inappbrowser" />
     <!--<gap:plugin name="org.apache.cordova.media" />-->
     <!--<gap:plugin name="org.apache.cordova.network-information" />-->
-    <gap:plugin name="org.apache.cordova.splashscreen" />
+    <!--<gap:plugin name="org.apache.cordova.splashscreen" />-->
     <gap:plugin name="org.apache.cordova.vibration" />
     <gap:plugin name="org.apache.cordova.statusbar" />
 	<gap:plugin name="com.phonegap.plugins.barcodescanner"/>
@@ -74,7 +75,7 @@
 
 	<!-- generic icon and splash -->
     <icon src="icon.png" />
-	<splash src="splash.png" />
+	<!--<splash src="splash.png" />-->
 
 	<!-- device-specific icons -->
     <icon src="icon-android-ldpi.png" gap:platform="android" density="ldpi" />
@@ -89,6 +90,12 @@
 
     <!--ipad-->
     <icon src="icon-ios-72.png" gap:platform="ios" width="72" height="72" />
+
+    <splash src="splash.png" gap:platform="ios" height="480" width="320" />
+    <splash src="splash.png" gap:platform="ios" height="960" width="640" />
+    <splash src="splash.png" gap:platform="ios" height="1024" width="768" />
+    <splash src="splash.png" gap:platform="ios" height="768" width="1024" />
+
     <!--<icon gap:platform="blackberry" src="www/res/icon/blackberry/icon-80.png" />-->
     <!--<icon gap:platform="blackberry" gap:state="hover" src="www/res/icon/blackberry/icon-80.png" />-->
     <!--<icon gap:platform="ios" height="57" src="www/res/icon/ios/icon-57.png" width="57" />-->
