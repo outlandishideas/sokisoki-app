@@ -10,11 +10,7 @@ angular
 				}
 			},
 			openExternalUrl: function(url) {
-				if (typeof navigator !== "undefined" && navigator.app) {
-					navigator.app.loadUrl(url, { openExternal:true });
-				} else {
-					window.open(url, "_blank");
-				}
+				window.open(url, "_system");
 			},
 			showAlert: function(title, message) {
 				if (typeof navigator !== "undefined" && navigator.notification) {
