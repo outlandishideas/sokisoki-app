@@ -66,7 +66,7 @@ angular.module('sokisoki')
 							//do nothing
 						});
 						scope.$apply(function() {
-							$location.path('/product/' + scanned);
+							$location.path('/product/' + scanned + '/scan');
 						});
 					});
 				};

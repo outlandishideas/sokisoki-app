@@ -92,7 +92,7 @@ angular
                 q.resolve({id_str: '12349876', 'screen_name': 'rasmuswinter'});
                 return q.promise;
             };
-            service.getAccessToken = function() {
+            service.getAccessData = function() {
                 return {
                     key: 'abc1',
                     secret: 'def1'
@@ -111,7 +111,7 @@ angular
                 });
                 return currentData.deferred.promise;
             };
-            service.getAccessToken = function() {
+            service.getAccessData = function() {
                 return {
                     key: currentData.oauth.getAccessTokenKey(),
                     secret: currentData.oauth.getAccessTokenSecret()

@@ -37,7 +37,7 @@ angular.module('sokisoki')
 		sokiFacebook.login()
 			.then(function(data) {
 				sokiLogger.log(data);
-				sokiUserUtil.login('facebook', data.id, data.name, {}, signInCallback);
+				sokiUserUtil.login('facebook', data.id, data.name, sokiFacebook.getAccessData(), signInCallback);
 			}, function(data) {
 				sokiLogger.log('error signing in to facebook');
 				sokiLogger.log(data);
@@ -50,7 +50,7 @@ angular.module('sokisoki')
 		$scope.signingIn = true;
 		sokiTwitter.login()
 			.then(function(data) {
-				sokiUserUtil.login('twitter', data.id_str, data.screen_name, sokiTwitter.getAccessToken(), signInCallback);
+				sokiUserUtil.login('twitter', data.id_str, data.screen_name, sokiTwitter.getAccessData(), signInCallback);
 			}, function(data) {
 				sokiLogger.log('error signing in to twitter');
 				sokiLogger.log(data);

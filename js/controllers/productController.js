@@ -7,6 +7,8 @@ angular.module('sokisoki')
                                           sokiEventHandler, sokiBarcode, sokiConfig, sokiAppUtil, sokiUserUtil, sokiTwitter, sokiFacebook) {
 	var _actions = sokiConfig.get('ACTIONS');
 
+	var showToast = $routeParams.arg == 'scan';
+
 	// call base controller
 	$controller('UserController', {$scope: $scope});
 
@@ -20,7 +22,19 @@ angular.module('sokisoki')
 		classes: function() {
 			return ($scope.toast.message ? 'open ' : 'closed ') + $scope.toast.action;
 		},
-		promise: null
+		promise: null,
+		cancel: function() {
+			if ($scope.toast.promise) {
+				$timeout.cancel($scope.toast.promise);
+			}
+		},
+		show: function(a) {
+			$scope.toast.message = a.alert;
+			$scope.toast.action = a.present;
+			$scope.toast.promise = $timeout(function() {
+				$scope.toast.message = '';
+			}, 2000);
+		}
 	};
 
 	var content = sokiBarcode.get('metadata');
@@ -48,6 +62,10 @@ angular.module('sokisoki')
 		history: history
 	};
 
+	if (showToast) {
+		$scope.toast.show(_actions.scan);
+	}
+
 	$scope.share = {
 		action: null,
 		message: '',
@@ -70,9 +88,7 @@ angular.module('sokisoki')
 			var action = $scope.share.action;
 			var message = $scope.share.message;
 			$scope.share.hide();
-			if ($scope.toast.promise) {
-				$timeout.cancel($scope.toast.promise);
-			}
+			$scope.toast.cancel();
 			var user = sokiUserUtil.get();
 			var sharer = null;
 			if (user.userType == 'facebook') {
@@ -84,13 +100,9 @@ angular.module('sokisoki')
 				sharer(message, user.accessData);
 			}
 
-			sokiBarcode.doAction($routeParams.barcode, action.present, {message: message}, function() {
-				$scope.toast.message = action.alert;
-				$scope.toast.action = action.present;
-				$scope.toast.promise = $timeout(function() {
-					$scope.toast.message = '';
-				}, 2000);
-			});
+			//sokiBarcode.doAction($routeParams.barcode, action.present, {message: message}, function() {
+			//	$scope.toast.show(action);
+			//});
 		}
 	};
 	$scope.performedActions = sokiBarcode.get('user_actions');

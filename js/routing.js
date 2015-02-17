@@ -67,7 +67,7 @@ angular.module('sokisoki')
 	        templateUrl: 'views/onboard.html',
 	        controller: 'OnboardController'
         })
-        .when('/product/:barcode', {
+        .when('/product/:barcode/:arg?', {
 	        templateUrl: 'views/product.html',
 	        controller: 'ProductController',
 			resolve: {
