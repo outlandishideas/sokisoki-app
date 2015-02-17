@@ -79,26 +79,26 @@
 
 	<!-- device-specific icons -->
     <platform name="android">
-        <icon src="icon-android-ldpi.png" density="ldpi" />
-        <icon src="icon-android-mdpi.png" density="mdpi" />
-        <icon src="icon-android-hdpi.png" density="hdpi" />
-        <icon src="icon-android-xhdpi.png" density="xhdpi" />
+        <icon src="www\icon-android-ldpi.png" density="ldpi" />
+        <icon src="www\icon-android-mdpi.png" density="mdpi" />
+        <icon src="www\icon-android-hdpi.png" density="hdpi" />
+        <icon src="www\icon-android-xhdpi.png" density="xhdpi" />
 
-        <splash src="splash-android.9.png" density="ldpi" />
-        <splash src="splash-android.9.png" density="mdpi" />
-        <splash src="splash-android.9.png" density="hdpi" />
-        <splash src="splash-android.9.png" density="xhdpi" />
+        <splash src="www\splash-android.9.png" density="ldpi" />
+        <splash src="www\splash-android.9.png" density="mdpi" />
+        <splash src="www\splash-android.9.png" density="hdpi" />
+        <splash src="www\splash-android.9.png" density="xhdpi" />
     </platform>
 
 
     <platform name="ios">
         <!--ipad-->
-        <icon src="icon-ios-72.png" width="72" height="72" />
+        <icon src="www\icon-ios-72.png" width="72" height="72" />
 
-        <splash src="splash.png" height="480" width="320" />
-        <splash src="splash.png" height="960" width="640" />
-        <splash src="splash.png" height="1024" width="768" />
-        <splash src="splash.png" height="768" width="1024" />
+        <splash src="www\splash.png" height="480" width="320" />
+        <splash src="www\splash.png" height="960" width="640" />
+        <splash src="www\splash.png" height="1024" width="768" />
+        <splash src="www\splash.png" height="768" width="1024" />
     </platform>
 
     <!--<icon gap:platform="blackberry" src="www/res/icon/blackberry/icon-80.png" />-->
