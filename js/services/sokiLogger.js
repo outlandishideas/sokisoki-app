@@ -36,8 +36,9 @@ angular
 				line = 36;
 						var args = regex.exec(stack[i]);
 						if (args == null) {
-							var iosRegex = /(.+)@(.+):([0-9]+):([0-9]+)/g;
+							var iosRegex = /(.+):([0-9]+):([0-9]+)/g;
 							args = iosRegex.exec(stack[i]);
+							args.unshift('unknown');
 						}
 				line = 38;
 						if (typeof args != 'undefined' && args != null && args.length >= 4) {
