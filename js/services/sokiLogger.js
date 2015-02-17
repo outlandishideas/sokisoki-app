@@ -27,17 +27,21 @@ angular
 					for (var i = 0; i < stack.length; i++) {
 						var regex = /(.+)\s*\((.+):([0-9]+):([0-9]+)\)/g;
 						var args = regex.exec(stack[i]);
-						var fileComponents = args[2].split('/');
-						if (fileComponents[fileComponents.length - 1] != 'sokiLogger.js') {
-							var file = fileComponents.slice(-2).join('/');
-							_service.logs.unshift({
-								date: new Date(),
-								file: file,
-								line: args[3],
-								msg: msg
-							});
-							console.log('SOKI_DEBUG: ' + file + ' line ' + args[3] + ' :: ' + msg);
-							break;
+						if (args.length > 2) {
+							var fileComponents = args[2].split('/');
+							if (fileComponents[fileComponents.length - 1] != 'sokiLogger.js') {
+								var file = fileComponents.slice(-2).join('/');
+								_service.logs.unshift({
+									date: new Date(),
+									file: file,
+									line: args[3],
+									msg: msg
+								});
+								console.log('SOKI_DEBUG: ' + file + ' line ' + args[3] + ' :: ' + msg);
+								break;
+							}
+						} else {
+							sokiAppUtil.showAlert('Failed', JSON.stringify(args));
 						}
 					}
 				} else {
