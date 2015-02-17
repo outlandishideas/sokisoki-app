@@ -36,7 +36,7 @@ angular
 				line = 36;
 						var args = regex.exec(stack[i]);
 				line = 38;
-						if (typeof args != 'undefined' && args.length > 2) {
+						if (typeof args != 'undefined' && args != null && args.length >= 4) {
 				line = 40;
 							var fileComponents = args[2].split('/');
 				line = 42;
