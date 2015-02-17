@@ -57,7 +57,7 @@ angular
 							}
 						} else {
 				line = 59;
-							sokiAppUtil.showAlert('Failed', JSON.stringify(args));
+							sokiAppUtil.showAlert('Failed to parse', stack[i]);
 						}
 					}
 				} else {
