@@ -16,8 +16,8 @@ angular.module('sokisoki', ['ngTouch', 'ngRoute', 'ngCordova', 'ui.bootstrap'])
 //        $compileProvider.urlSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
 //    })
 
-	.run(['$rootScope', 'sokiEventHandler', function ($rootScope, sokiEventHandler) {
-		if (typeof StatusBar != 'undefined' && StatusBar.hide) {
+	.run(['$rootScope', 'sokiEventHandler', 'sokiLogger', function ($rootScope, sokiEventHandler, sokiLogger) {
+		if (typeof device != 'undefined' && device.platform != 'Android' && typeof StatusBar != 'undefined' && StatusBar.hide) {
 			StatusBar.hide();
 		}
 		$rootScope.$on('$routeChangeStart', function (event) {
