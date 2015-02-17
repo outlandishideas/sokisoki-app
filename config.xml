@@ -78,23 +78,28 @@
 	<!--<splash src="splash.png" />-->
 
 	<!-- device-specific icons -->
-    <icon src="icon-android-ldpi.png" gap:platform="android" density="ldpi" />
-    <icon src="icon-android-mdpi.png" gap:platform="android" density="mdpi" />
-    <icon src="icon-android-hdpi.png" gap:platform="android" density="hdpi" />
-    <icon src="icon-android-xhdpi.png" gap:platform="android" density="xhdpi" />
+    <platform name="android">
+        <icon src="icon-android-ldpi.png" density="ldpi" />
+        <icon src="icon-android-mdpi.png" density="mdpi" />
+        <icon src="icon-android-hdpi.png" density="hdpi" />
+        <icon src="icon-android-xhdpi.png" density="xhdpi" />
 
-    <splash src="splash-android.9.png" gap:platform="android" density="ldpi" />
-    <splash src="splash-android.9.png" gap:platform="android" density="mdpi" />
-    <splash src="splash-android.9.png" gap:platform="android" density="hdpi" />
-    <splash src="splash-android.9.png" gap:platform="android" density="xhdpi" />
+        <splash src="splash-android.9.png" density="ldpi" />
+        <splash src="splash-android.9.png" density="mdpi" />
+        <splash src="splash-android.9.png" density="hdpi" />
+        <splash src="splash-android.9.png" density="xhdpi" />
+    </platform>
 
-    <!--ipad-->
-    <icon src="icon-ios-72.png" gap:platform="ios" width="72" height="72" />
 
-    <splash src="splash.png" gap:platform="ios" height="480" width="320" />
-    <splash src="splash.png" gap:platform="ios" height="960" width="640" />
-    <splash src="splash.png" gap:platform="ios" height="1024" width="768" />
-    <splash src="splash.png" gap:platform="ios" height="768" width="1024" />
+    <platform name="ios">
+        <!--ipad-->
+        <icon src="icon-ios-72.png" width="72" height="72" />
+
+        <splash src="splash.png" height="480" width="320" />
+        <splash src="splash.png" height="960" width="640" />
+        <splash src="splash.png" height="1024" width="768" />
+        <splash src="splash.png" height="768" width="1024" />
+    </platform>
 
     <!--<icon gap:platform="blackberry" src="www/res/icon/blackberry/icon-80.png" />-->
     <!--<icon gap:platform="blackberry" gap:state="hover" src="www/res/icon/blackberry/icon-80.png" />-->
