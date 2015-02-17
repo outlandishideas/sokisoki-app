@@ -35,6 +35,10 @@ angular
 						var regex = /(.+)\s*\((.+):([0-9]+):([0-9]+)\)/g;
 				line = 36;
 						var args = regex.exec(stack[i]);
+						if (args == null) {
+							var iosRegex = /(.+):([0-9]+):([0-9]+)/g;
+							args = iosRegex.exec(stack[i]);
+						}
 				line = 38;
 						if (typeof args != 'undefined' && args != null && args.length >= 4) {
 				line = 40;
