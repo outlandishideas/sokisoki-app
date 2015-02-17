@@ -4,7 +4,7 @@
 angular.module('sokisoki')
 
 .controller('ProductController', function($scope, $rootScope, $controller, $location, $routeParams, $timeout,
-                                          sokiEventHandler, sokiBarcode, sokiConfig, sokiAppUtil, sokiUserUtil, sokiTwitter, sokiFacebook) {
+                                          sokiEventHandler, sokiBarcode, sokiConfig, sokiAppUtil, sokiUserUtil, sokiTwitter, sokiFacebook, sokiLogger) {
 	var _actions = sokiConfig.get('ACTIONS');
 
 	var showToast = $routeParams.arg == 'scan';
@@ -85,10 +85,14 @@ angular.module('sokisoki')
 			$scope.share.message = '';
 		},
 		send: function() {
-			var action = $scope.share.action;
-			var message = $scope.share.message;
+			var args = {
+				action: $scope.share.action,
+				message: $scope.share.message
+			};
+
 			$scope.share.hide();
 			$scope.toast.cancel();
+
 			var user = sokiUserUtil.get();
 			var sharer = null;
 			if (user.userType == 'facebook') {
@@ -96,13 +100,20 @@ angular.module('sokisoki')
 			} else if (user.userType == 'twitter') {
 				sharer = sokiTwitter.share;
 			}
+
+			var doAction = function(res) {
+				sokiBarcode.doAction($routeParams.barcode, args.action.present, { message: args.message }, function() {
+					$scope.toast.show(args.action);
+				});
+			};
+
 			if (sharer) {
-				sharer(message, user.accessData);
+				// do the action, even if posting failed
+				sharer(args.message, user.accessData).then(doAction, doAction);
+			} else {
+				doAction();
 			}
 
-			//sokiBarcode.doAction($routeParams.barcode, action.present, {message: message}, function() {
-			//	$scope.toast.show(action);
-			//});
 		}
 	};
 	$scope.performedActions = sokiBarcode.get('user_actions');

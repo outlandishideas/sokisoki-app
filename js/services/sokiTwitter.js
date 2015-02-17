@@ -120,6 +120,8 @@ angular
         }
 
         service.share = function(message, accessData) {
+            var q = $q.defer();
+
             sokiLogger.log('Sharing on twitter: ' + message);
             var oa = oauth(oauthOptions);
             oa.setAccessToken(accessData.key, accessData.secret);
@@ -127,12 +129,16 @@ angular
                 function(res) {
                     sokiLogger.log('success');
                     sokiLogger.log(res);
+                    q.resolve(res);
                 },
                 function(err) {
                     sokiLogger.log('failure');
                     sokiLogger.log(err);
+                    q.reject(err);
                 }
             );
+
+            return q.promise;
         };
         return service;
     }]);
