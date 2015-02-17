@@ -2,6 +2,12 @@ angular
 	.module('sokisoki')
 	.factory('sokiAppUtil', function() {
 		return {
+			os: function() {
+				if (typeof device != 'undefined' && typeof device.platform != 'undefined') {
+					return device.platform;
+				}
+				return '';
+			},
 			exit: function() {
 				if (navigator.app){
 					navigator.app.exitApp();

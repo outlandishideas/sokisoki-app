@@ -66,6 +66,17 @@ angular.module('sokisoki')
 		$scope.toast.show(_actions.scan);
 	}
 
+	var user = sokiUserUtil.get();
+
+	$scope.shareIcon = 'fa fa-' + user.userType;
+
+	var sharer = null;
+	if (user.userType == 'facebook') {
+		sharer = sokiFacebook.share;
+	} else if (user.userType == 'twitter') {
+		sharer = sokiTwitter.share;
+	}
+
 	$scope.share = {
 		action: null,
 		message: '',
@@ -84,7 +95,7 @@ angular.module('sokisoki')
 			$scope.share.action = null;
 			$scope.share.message = '';
 		},
-		send: function() {
+		send: function(share) {
 			var args = {
 				action: $scope.share.action,
 				message: $scope.share.message
@@ -93,23 +104,21 @@ angular.module('sokisoki')
 			$scope.share.hide();
 			$scope.toast.cancel();
 
-			var user = sokiUserUtil.get();
-			var sharer = null;
-			if (user.userType == 'facebook') {
-				sharer = sokiFacebook.share;
-			} else if (user.userType == 'twitter') {
-				sharer = sokiTwitter.share;
-			}
-
-			var doAction = function(res) {
-				sokiBarcode.doAction($routeParams.barcode, args.action.present, { message: args.message }, function() {
+			var doAction = function(shared) {
+				sokiBarcode.doAction($routeParams.barcode, args.action.present, { message: args.message, shared: shared }, function() {
 					$scope.toast.show(args.action);
 				});
 			};
 
-			if (sharer) {
+			if (share && sharer) {
 				// do the action, even if posting failed
-				sharer(args.message, user.accessData).then(doAction, doAction);
+				sharer(args.message, user.accessData).then(
+					function(res) {
+						doAction('yes')
+					},
+					function(res) {
+						doAction('no')
+					});
 			} else {
 				doAction();
 			}

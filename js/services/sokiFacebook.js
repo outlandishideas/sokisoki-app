@@ -2,7 +2,7 @@ angular
     .module('sokisoki')
     .factory('sokiFacebook', ['$q', '$http', 'sokiLogger', function($q, $http, sokiLogger) {
         var _accessData = {};
-        var FB = facebookConnectPlugin;
+        var FB = typeof facebookConnectPlugin == 'undefined' ? {} : facebookConnectPlugin;
         return {
             login: function() {
                 var q = $q.defer();
@@ -44,24 +44,54 @@ angular
             share: function(message, accessData) {
                 var q = $q.defer();
                 sokiLogger.log('Sharing on facebook: ' + message);
-                FB.login(['publish_actions'],
-                    function(res) {
-                        var accessToken = res.authResponse.accessToken;
-                        $http
-                            .post('https://graph.facebook.com/me/feed?access_token=' + accessToken + '&message=' + encodeURIComponent(message), {})
-                            .then(function(res) {
-                                sokiLogger.log('facebook success');
-                                sokiLogger.log(res);
-                                q.resolve(res);
-                            }, function(err) {
-                                sokiLogger.log('facebook error');
-                                sokiLogger.log(err);
-                                q.reject(err);
-                            });
-                    }, function(err) {
-                        q.reject(err);
-                    }
-                );
+
+                var onFail = function(errorObj) {
+                    sokiLogger.log('failure');
+                    sokiLogger.log(errorObj);
+                    q.reject(errorObj);
+                };
+
+                var checkPerms = function() {
+                    FB.api('/me/permissions', [], function(res) {
+                        var found = false;
+                        if (res && res.data && res.data.length) {
+                            for (var i=0; i<res.data.length; i++) {
+                                if (res.data[i].permission == 'publish_actions' && res.data[i].status == 'granted') {
+                                    found = true;
+                                    break;
+                                }
+                            }
+                        }
+                        if (found) {
+                            getAccessToken();
+                        } else {
+                            onFail('No permission granted');
+                        }
+                    }, onFail);
+                };
+
+                var getAccessToken = function() {
+                    FB.login([],
+                        function(res) {
+                            doPost(res.authResponse.accessToken);
+                        }, onFail);
+                };
+
+                var doPost = function(accessToken) {
+                    $http
+                        .post('https://graph.facebook.com/me/feed?access_token=' + accessToken + '&message=' + encodeURIComponent(message), {})
+                        .then(function(res) {
+                            sokiLogger.log('facebook success');
+                            sokiLogger.log(res);
+                            q.resolve(res);
+                        }, function(err) {
+                            sokiLogger.log('facebook error');
+                            sokiLogger.log(err);
+                            q.reject(err);
+                        });
+                };
+
+                checkPerms();
 
                 return q.promise;
             }
