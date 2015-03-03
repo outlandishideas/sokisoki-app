@@ -67,6 +67,10 @@ angular.module('sokisoki')
 	        templateUrl: 'views/onboard.html',
 	        controller: 'OnboardController'
         })
+        .when('/product-unknown/:barcode', {
+	        templateUrl: 'views/product-unknown.html',
+	        controller: 'ProductUnknownController'
+        })
         .when('/product/:barcode/:arg?', {
 	        templateUrl: 'views/product.html',
 	        controller: 'ProductController',
@@ -78,8 +82,8 @@ angular.module('sokisoki')
 					sokiBarcode.load(barcode, function(err) {
 						if(err) {
 							defer.reject();
-							$location.path('/history');
-							sokiAppUtil.showAlert('Product not found', 'Unrecognised barcode: ' + barcode);
+							$location.path('/product-unknown/' + barcode);
+							//sokiAppUtil.showAlert('Product not found', 'Unrecognised barcode: ' + barcode);
 							return;
 						}
 

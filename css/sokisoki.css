@@ -475,3 +475,13 @@ body, .main-content {
 .scroll-window {
 	overflow: auto;
 }
+
+.page-container.product-unknown {
+	background: #ddd;
+}
+.page-container.product-unknown h1 {
+	text-align: center;
+}
+.page-container.product-unknown p {
+	padding: 0 10px;
+}
