@@ -491,7 +491,8 @@ body, .main-content {
 	padding: 0 10px;
 }
 
-@media only screen and (min-device-height: 600px) {
+/* give more vertical space/size with taller devices */
+@media only screen and (min-device-height: 560px) {
 	.page-container.onboard {
 		padding-top: 100px;
 	}
