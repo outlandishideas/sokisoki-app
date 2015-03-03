@@ -115,17 +115,22 @@ body, .main-content {
 
 .page-container.onboard {
 	background: #76bbd9;
-	padding: 100px 0 0;
+	padding: 80px 0 0;
 }
-.page-container.onboard .anchor-bottom {
+.page-container.onboard .carousel-indicators {
+	margin-bottom: 0;
+}
+
+.onboard-footer {
+	background: #76bbd9;
 	padding: 0 20px 20px;
 }
-.page-container.onboard .btn-got-it {
+.onboard-footer .btn-got-it {
 	background-color: #3b8ab7;
 	color: #fff;
 }
 .page-container.onboard .slide {
-	min-height: 400px;
+	min-height: 330px;
 }
 .page-container.onboard .slide p {
 	width: 200px;
@@ -484,4 +489,14 @@ body, .main-content {
 }
 .page-container.product-unknown p {
 	padding: 0 10px;
+}
+
+@media only screen and (min-device-height: 600px) {
+	.page-container.onboard {
+		padding-top: 100px;
+	}
+
+	.page-container.onboard .slide {
+		min-height: 400px;
+	}
 }
