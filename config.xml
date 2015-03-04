@@ -45,6 +45,8 @@
 	<preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="1000" />
     <preference name="StatusBarOverlaysWebView" value="false" />
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="UIWebViewBounce" value="false" />
 
     <!--<gap:plugin name="org.apache.cordova.battery-status" />-->
     <!--<gap:plugin name="org.apache.cordova.camera" />-->
