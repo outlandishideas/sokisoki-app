@@ -17,6 +17,11 @@
 	<div id="user-menu" class="page-container">
 		<h2>Settings</h2>
 		<ul class="list-group">
+			<li class="list-group-item" ng-if="user">
+				<div class="menu-label">
+					<span class="fa fa-{{ user.network_type }}"></span> {{ user.display_name }}
+				</div>
+			</li>
 			<li class="list-group-item" ng-click="history()">
 				<div class="menu-icon"><span class="fa fa-history"></span></div>
 				<div class="menu-label">My History</div>

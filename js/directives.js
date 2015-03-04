@@ -45,6 +45,7 @@ angular.module('sokisoki')
 				if (typeof state.show == 'undefined') {
 					state.show = false;
 				}
+				scope.user = sokiUserUtil.get();
 				scope.scan = function() {
 					sokiScanner.scan(function(result) {
 						var scanned = result.text;
