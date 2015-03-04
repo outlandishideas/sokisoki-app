@@ -21,7 +21,7 @@ angular
                 present: 'scan',
                 past: 'scanned',
                 label: 'Scanned this',
-                alert: 'Scanned! (todo)',
+                alert: 'Scanned!',
                 message: 'I scanned this #sokisoki'
             },
             want: {

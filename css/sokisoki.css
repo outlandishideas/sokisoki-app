@@ -466,9 +466,19 @@ body, .main-content {
 .share-action .share-action-contents {
 	padding: 10px;
 }
+.share-action .share-action-contents .characters-remaining {
+	float: right;
+}
+.share-action .share-action-contents button.disabled {
+	visibility: hidden;
+}
 .share-action textarea {
 	width: 100%;
 	height: 100px;
+}
+.share-action textarea.ng-invalid {
+	border-color: #f00;
+	background-color: #fcc;
 }
 .share-action.closed {
 	height: 0;

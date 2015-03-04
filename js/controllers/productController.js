@@ -70,6 +70,8 @@ angular.module('sokisoki')
 
 	$scope.shareIcon = 'fa fa-' + user.userType;
 
+	$scope.maxLength = user.userType == 'twitter' ? 140: 0;
+
 	var sharer = null;
 	if (user.userType == 'facebook') {
 		sharer = sokiFacebook.share;
