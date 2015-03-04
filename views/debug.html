@@ -1,7 +1,7 @@
 <soki-navbar ng-if="menuState" state="menuState"></soki-navbar>
 
-<div class="main-content" ng-class="{'with-header': menuState}">
-	<div class="page-container debug">
+<div class="main-content debug" ng-class="{'with-header': menuState}">
+	<div class="page-container">
 		<div class="debug-buttons">
 			<button type="button" class="btn btn-info" ng-click="back()" ng-if="!menuState">Back</button>
 			<button type="button" class="btn btn-warning" ng-click="clearLogs()">Clear logs</button>

@@ -3,7 +3,7 @@
 /* Controllers */
 angular.module('sokisoki')
 
-.controller('HistoryController', function($scope, $rootScope, $location, $controller, sokiEventHandler, sokiAppUtil, sokiUserUtil, sokiConfig, sokiLogger) {
+.controller('HistoryController', function($scope, $rootScope, $location, $controller, sokiEventHandler, sokiAppUtil, sokiUserUtil, sokiConfig, sokiLogger, sokiScanner, sokiBarcode) {
 	sokiLogger.log('In history controller');
 	// call base controller
 	$controller('UserController', {$scope: $scope});
@@ -11,6 +11,18 @@ angular.module('sokisoki')
 	$scope.menuState = {
 		title: 'History',
 		show: false
+	};
+
+	$scope.scan = function() {
+		sokiScanner.scan(function(result) {
+			var scanned = result.text;
+			sokiBarcode.doAction(scanned, ACTIONS.scan.present, {}, function() {
+				//do nothing
+			});
+			$scope.$apply(function() {
+				$location.path('/product/' + scanned + '/scan');
+			});
+		});
 	};
 
 	sokiEventHandler.setBackButtonHandler(function(event) {

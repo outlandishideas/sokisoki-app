@@ -1,7 +1,7 @@
 <soki-navbar state="menuState"></soki-navbar>
 
-<div class="main-content with-header">
-	<div class="page-container history">
+<div class="main-content with-header history">
+	<div class="page-container">
 		<div class="no-history" ng-show="!history || history.length == 0">
 			<div class="slide">
 				<div class="disc">
@@ -25,5 +25,9 @@
 				</div>
 			</a>
 		</div>
+	</div>
+
+	<div class="anchor-bottom" ng-show="!history || history.length == 0">
+		<button type="button" class="btn btn-info btn-block btn-lrg" ng-click="scan()">Start scanning!</button>
 	</div>
 </div>

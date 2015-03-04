@@ -75,15 +75,15 @@ angular.module('sokisoki')
 	        templateUrl: 'views/product.html',
 	        controller: 'ProductController',
 			resolve: {
-				loadBarcode: function($q, $route, $location, sokiBarcode, sokiAppUtil) {
+				loadBarcode: function($q, $route, $location, sokiBarcode) {
 					var defer = $q.defer();
 					var barcode = $route.current.params.barcode;
 
+					// load the information about the barcode, but redirect to product-unknown on error
 					sokiBarcode.load(barcode, function(err) {
 						if(err) {
 							defer.reject();
 							$location.path('/product-unknown/' + barcode);
-							//sokiAppUtil.showAlert('Product not found', 'Unrecognised barcode: ' + barcode);
 							return;
 						}
 
