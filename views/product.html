@@ -48,13 +48,13 @@
 		<div class="share-action" ng-class="share.classes()">
 			<form class="share-action-contents" name="shareForm">
 				<div class="characters-remaining" ng-if="maxLength">
-					<span ng-if="!shareForm.share_message.$invalid">Characters left: {{maxLength - share.message.length}}</span>
-					<span ng-if="shareForm.share_message.$invalid">Too many characters</span>
+					<span ng-if="!shareForm.share_message.$invalid">{{ share.message.length }}/{{ maxLength }}</span>
+					<span ng-if="shareForm.share_message.$error.maxlength">Too many characters</span>
 				</div>
 				<div ng-if="share.action" class="soki-action action-{{share.action.present}}">
 					<div action-icon="share.action"></div>
 				</div>
-				<textarea name="share_message" ng-model="share.message" ng-maxlength="maxLength"></textarea>
+				<textarea name="share_message" ng-model="share.message" ng-maxlength="maxLength" ng-required="true"></textarea>
 				<div>
 					<button type="button" ng-click="share.send(true)" class="btn btn-primary" ng-disabled="shareForm.share_message.$invalid"><span ng-class="shareIcon"></span> Share</button>
 					<button type="button" ng-click="share.send(false)" class="btn btn-info" ng-disabled="shareForm.share_message.$invalid">Soki only</button>
