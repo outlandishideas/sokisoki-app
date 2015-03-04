@@ -11,6 +11,11 @@ body, .main-content {
 	font-family: 'AvenirMedium', serif;
 }
 
+body, .main-content, .page-container {
+	-webkit-overflow-scrolling: touch;
+	-webkit-transform: translate3d(0, 0, 0);
+}
+
 .soki-action.action-buy {
 	background-color: #00b1b9;
 	color: #00b1b9;
