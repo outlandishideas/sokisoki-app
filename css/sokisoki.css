@@ -386,8 +386,30 @@ body, .main-content {
 	padding: 10px;
 }
 
-.no-history {
+.page-container.history .no-history {
 	padding: 10px;
+	text-align: center;
+}
+
+.page-container.history .no-history .slide {
+	margin-top: 20px;
+}
+
+.page-container.history .no-history .slide .disc {
+	margin-left: auto;
+	margin-right: auto;
+	width: 160px;
+	height: 160px;
+	border-radius: 80px;
+	background: #3b8ab7;
+	color: #fff;
+	font-size: 80px;
+	line-height: 175px;
+}
+
+.page-container.history .no-history p {
+	padding-left: 10%;
+	padding-right: 10%;
 }
 
 .toast-container {

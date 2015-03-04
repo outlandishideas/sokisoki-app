@@ -3,7 +3,16 @@
 <div class="main-content with-header">
 	<div class="page-container history">
 		<div class="no-history" ng-show="!history || history.length == 0">
-			You haven't scanned anything yet. Use the scan button above to start your soki soki adventure
+			<div class="slide">
+				<div class="disc">
+					<span class="fa fa-barcode"></span>
+				</div>
+			</div>
+			<h2>Start Scanning</h2>
+			<p>
+				It doesn't look like you have scanned any barcodes yet
+				<br />:(
+			</p>
 		</div>
 		<div class="action-history list-group" ng-show="history && history.length > 0">
 			<a class="action-history-item soki-action action-{{event.action.present}} list-group-item" ng-repeat="event in history" ng-click="showEvent(event)">
