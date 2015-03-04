@@ -11,7 +11,7 @@ body, .main-content {
 	font-family: 'AvenirMedium', serif;
 }
 
-body, .main-content {
+.ios-scrollfix {
 	-webkit-overflow-scrolling: touch;
 	-webkit-transform: translate3d(0, 0, 0);
 }
