@@ -58,7 +58,7 @@ angular
 								}
 							}
 						} else {
-							sokiAppUtil.showAlert('Failed to parse', stack[i]);
+							sokiAppUtil.showNativeAlert('Failed to parse', stack[i]);
 						}
 					}
 					if (toLog) {
@@ -75,7 +75,7 @@ angular
 					console.log('SOKI_DEBUG: ' + msg);
 				}
 			} catch (ex) {
-				sokiAppUtil.showAlert(typeof msg, msg + "\n\n" + ex.message + "\n" + JSON.stringify(ex));
+				sokiAppUtil.showNativeAlert(typeof msg, msg + "\n\n" + ex.message + "\n" + JSON.stringify(ex));
 			}
 		};
 

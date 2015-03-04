@@ -18,7 +18,7 @@ angular
 			openExternalUrl: function(url) {
 				window.open(url, "_system");
 			},
-			showAlert: function(title, message) {
+			showNativeAlert: function(title, message) {
 				if (typeof navigator !== "undefined" && navigator.notification) {
 					navigator.notification.alert(message, null, title);
 				} else {

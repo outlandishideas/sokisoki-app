@@ -41,7 +41,7 @@ angular.module('sokisoki')
 			}, function(data) {
 				sokiLogger.log('error signing in to facebook');
 				sokiLogger.log(data);
-				sokiAppUtil.showAlert('Error', 'Facebook login failed. Please try again');
+				sokiAppUtil.showNativeAlert('Error', 'Facebook login failed. Please try again');
 				$scope.signingIn = false;
 			});
 	};
@@ -54,7 +54,7 @@ angular.module('sokisoki')
 			}, function(data) {
 				sokiLogger.log('error signing in to twitter');
 				sokiLogger.log(data);
-				sokiAppUtil.showAlert('Error', 'Twitter login failed. Please try again');
+				sokiAppUtil.showNativeAlert('Error', 'Twitter login failed. Please try again');
 				$scope.signingIn = false;
 			});
 	};
