@@ -70,7 +70,7 @@ angular.module('sokisoki')
 
 	$scope.shareIcon = 'fa fa-' + user.userType;
 
-	$scope.maxLength = user.userType == 'twitter' ? 140: 0;
+	$scope.maxLength = user.userType == 'twitter' ? 140 : false;// allow any length for non-twitter
 
 	var sharer = null;
 	if (user.userType == 'facebook') {
@@ -97,22 +97,34 @@ angular.module('sokisoki')
 			$scope.share.action = null;
 			$scope.share.message = '';
 		},
-		send: function(share) {
+		promptSend: function() {
 			var args = {
 				action: $scope.share.action,
-				message: $scope.share.message
+				message: $scope.share.message,
+				socialMedia: false
 			};
 
 			$scope.share.hide();
 			$scope.toast.cancel();
 
+			sokiAppUtil.showNativeConfirm('Share', 'Would you like to share this on ' + user.userType + '?', function(response) {
+				args.socialMedia = (response === true || response === 1);
+				sokiLogger.log('Sending action');
+				sokiLogger.log(args);
+				$scope.share.send(args);
+			});
+		},
+		send: function(args) {
+
 			var doAction = function(shared) {
-				sokiBarcode.doAction($routeParams.barcode, args.action.id, { message: args.message, shared: shared }, function() {
-					$scope.toast.show(args.action);
+				sokiBarcode.doAction($routeParams.barcode, args.action.id, { message: args.message, shared: shared }, function(err) {
+					if (!err) {
+						$scope.toast.show(args.action);
+					}
 				});
 			};
 
-			if (share && sharer) {
+			if (args.socialMedia && sharer) {
 				// do the action, even if posting failed
 				sharer(args.message, user.accessData).then(
 					function(res) {
@@ -122,11 +134,12 @@ angular.module('sokisoki')
 						doAction('no')
 					});
 			} else {
-				doAction();
+				doAction('no');
 			}
 
 		}
 	};
+
 	$scope.performedActions = sokiBarcode.get('user_actions');
 
 	$scope.openUrl = sokiAppUtil.openExternalUrl;

@@ -474,6 +474,12 @@ body, .main-content, .page-container {
 .share-action .share-action-contents .characters-remaining {
 	float: right;
 }
+.share-action .share-action-contents .buttons .button-col {
+	padding: 0;
+}
+.share-action .share-action-contents .buttons button {
+	border-radius: 0;
+}
 .share-action .share-action-contents button.disabled {
 	visibility: hidden;
 }

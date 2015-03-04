@@ -25,6 +25,16 @@ angular
 					window.alert(message);
 				}
 			},
+			showNativeConfirm: function(title, message, callback) {
+				if (typeof navigator !== "undefined" && navigator.notification) {
+					navigator.notification.confirm(message, callback, title, ['Yes', 'No']);
+				} else {
+					var result = window.confirm(message);
+					if (callback) {
+						callback(result);
+					}
+				}
+			},
 			oauth: function() {
 				// taken from https://github.com/bytespider/jsOAuth
 				// see http://bytespider.github.io/jsOAuth/api-reference/ for references
