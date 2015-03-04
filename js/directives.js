@@ -15,24 +15,10 @@ angular.module('sokisoki')
 			restrict: 'A',
 			link: function(scope, element, attrs) {
 				var args = scope.$eval(attrs.actionIcon);
-				if (typeof args != 'undefined' && args.present) {
-					var icon = null;
-					switch (args.present) {
-						case ACTIONS.scan.present:
-							icon = 'barcode';
-							break;
-						case ACTIONS.buy.present:
-							icon = 'shopping-cart';
-							break;
-						case ACTIONS.love.present:
-							icon = 'heart';
-							break;
-						case ACTIONS.want.present:
-							icon = 'star';
-							break;
-					}
+				if (typeof args != 'undefined' && args.id && args.id in ACTIONS) {
+					var icon = ACTIONS[args.id].faIcon;
 					if (icon) {
-						element.append('<span class="fa fa-' + icon + '"></span>')
+						element.append('<span class="fa ' + icon + '"></span>')
 							.addClass('action-icon');
 					}
 				}
@@ -62,7 +48,7 @@ angular.module('sokisoki')
 				scope.scan = function() {
 					sokiScanner.scan(function(result) {
 						var scanned = result.text;
-						sokiBarcode.doAction(scanned, ACTIONS.scan.present, {}, function() {
+						sokiBarcode.doAction(scanned, ACTIONS.scan.id, {}, function() {
 							//do nothing
 						});
 						scope.$apply(function() {

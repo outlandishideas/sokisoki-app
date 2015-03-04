@@ -11,19 +11,6 @@ angular.module('sokisoki')
 				route.resolve = {};
 			}
 
-			route.resolve.getConfig = function($q, sokiConfig) {
-				var defer = $q.defer();
-
-				sokiConfig.load(function(err) {
-					if(err) {
-						defer.reject();
-						return;
-					}
-
-					defer.resolve();
-				});
-			};
-
 			route.resolve.checkLogin = function(sokiUserUtil) {
 				return sokiUserUtil.checkStatus(path);
 			};

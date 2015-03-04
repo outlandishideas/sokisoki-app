@@ -1,59 +1,67 @@
 angular
     .module('sokisoki')
-    .value('config', {
-        API_ENDPOINT: 'http://sokisoki.com/api',
-        ACTIONS: {
+    .factory('sokiConfig', function($q, sokiLogger) {
+        var methods = {};
+        var _config = {};
+        _config.API_ENDPOINT = 'http://sokisoki.com/api';
+        _config.ACTIONS = {
             buy: {
-                present: 'buy',
-                past: 'bought',
-                label: 'Buy this',
+                verbs: {
+                    present: 'have',
+                    past: 'had'
+                },
+                label: 'Have',
                 alert: 'Bought! (todo)',
-                message: 'I bought this #sokisoki'
+                message: 'I bought this #sokisoki',
+                faIcon: 'fa-check'
             },
             love: {
-                present: 'love',
-                past: 'loved',
-                label: 'Love this',
+                verbs: {
+                    present: 'love',
+                    past: 'loved'
+                },
+                label: 'Love',
                 alert: 'Loved! (todo)',
-                message: 'I loved this #sokisoki'
+                message: 'I loved this #sokisoki',
+                faIcon: 'fa-heart'
             },
             scan: {
-                present: 'scan',
-                past: 'scanned',
-                label: 'Scanned this',
+                verbs: {
+                    present: 'scan',
+                    past: 'scanned'
+                },
+                label: 'Scanned',
                 alert: 'Scanned!',
-                message: 'I scanned this #sokisoki'
+                message: 'I scanned this #sokisoki',
+                faIcon: 'fa-barcode'
             },
             want: {
-                present: 'want',
-                past: 'wanted',
-                label: 'Wish list',
+                verbs: {
+                    present: 'want',
+                    past: 'wanted'
+                },
+                label: 'Want',
                 alert: 'Added to wish list! (todo)',
-                message: 'I added this to my wishlist #sokisoki'
+                message: 'I added this to my wishlist #sokisoki',
+                faIcon: 'fa-star'
             }
-        }
-    })
-    .factory('sokiConfig', function($q, config, sokiLogger) {
-        var methods = {},
-            _config;
-
-        methods.load = function(done) {
-            if(config) {
-                _config = config;
-                done(null, _config);
-            }
-
-            done('no configuration');
         };
 
+        // set id properties
+        for (var i in _config.ACTIONS) {
+            if (_config.ACTIONS.hasOwnProperty(i)) {
+                _config.ACTIONS[i].id = i;
+            }
+        }
+
         methods.get = function(key) {
-            return config[key];
+            return _config[key];
         };
 
         methods.put = function(key, value) {
             sokiLogger.log('! Warning: changes to config will not persist');
-            config[key] = value;
-            return config[key];
+            _config[key] = value;
+            return _config[key];
         };
 
         return methods;

@@ -29,10 +29,10 @@
 		<div class="product-history">
 			<div ng-show="barcode.history && barcode.history.length > 0">
 				<div class="product-history-header">Recent activity</div>
-				<div class="action-history-item soki-action action-{{row.action.present}} list-group-item" ng-repeat="row in barcode.history">
+				<div class="action-history-item soki-action action-{{row.action.id}} list-group-item" ng-repeat="row in barcode.history">
 					<div action-icon="event.action"></div>
 					<div class="details">
-						<div class="action-type">{{row.action.past}}</div>
+						<div class="action-type">{{row.action.verbs.past}}</div>
 						<div class="description" ng-if="row.user_type == 'twitter'">@{{ row.user_name }}</div>
 						<div class="description" ng-if="row.user_type == 'facebook'">{{ row.user_name }}</div>
 						<div class="date">{{ row.date | date: 'd MMM' }}</div>
@@ -51,7 +51,7 @@
 					<span ng-if="!shareForm.share_message.$invalid">{{ share.message.length }}/{{ maxLength }}</span>
 					<span ng-if="shareForm.share_message.$error.maxlength">Too many characters</span>
 				</div>
-				<div ng-if="share.action" class="soki-action action-{{share.action.present}}">
+				<div ng-if="share.action" class="soki-action action-{{share.action.id}}">
 					<div action-icon="share.action"></div>
 				</div>
 				<textarea name="share_message" ng-model="share.message" ng-maxlength="maxLength" ng-required="true"></textarea>
@@ -66,7 +66,7 @@
 			<span class="toast-message">{{ toast.message }}</span>
 		</div>
 		<div class="row">
-			<div class="col-xs-4 soki-action action-{{action.present}}" ng-repeat="action in actions" ng-click="performAction(action)">
+			<div class="col-xs-4 soki-action action-{{action.id}}" ng-repeat="action in actions" ng-click="performAction(action)">
 				<div action-icon="action"></div>
 				<div class="action-label">{{action.label}}</div>
 			</div>

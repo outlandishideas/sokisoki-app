@@ -30,7 +30,7 @@ angular.module('sokisoki')
 		},
 		show: function(a) {
 			$scope.toast.message = a.alert;
-			$scope.toast.action = a.present;
+			$scope.toast.action = a.id;
 			$scope.toast.promise = $timeout(function() {
 				$scope.toast.message = '';
 			}, 2000);
@@ -83,7 +83,7 @@ angular.module('sokisoki')
 		action: null,
 		message: '',
 		classes: function() {
-			return $scope.share.action ? $scope.share.action.present + ' open' : 'closed';
+			return $scope.share.action ? $scope.share.action.id + ' open' : 'closed';
 		},
 		show: function(action) {
 			$scope.share.action = action;
@@ -107,7 +107,7 @@ angular.module('sokisoki')
 			$scope.toast.cancel();
 
 			var doAction = function(shared) {
-				sokiBarcode.doAction($routeParams.barcode, args.action.present, { message: args.message, shared: shared }, function() {
+				sokiBarcode.doAction($routeParams.barcode, args.action.id, { message: args.message, shared: shared }, function() {
 					$scope.toast.show(args.action);
 				});
 			};

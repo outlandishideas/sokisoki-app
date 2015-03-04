@@ -476,7 +476,7 @@ body, .main-content {
 	width: 100%;
 	height: 100px;
 }
-.share-action textarea.ng-invalid {
+.share-action.open textarea.ng-invalid {
 	border-color: #f00;
 	background-color: #fcc;
 }
