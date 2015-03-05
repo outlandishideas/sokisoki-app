@@ -34,6 +34,7 @@ angular.module('sokisoki')
 
 	$scope.facebookLogin = function() {
 		$scope.signingIn = true;
+		sokiLogger.log('Logging in to facebook');
 		sokiFacebook.login()
 			.then(function(data) {
 				sokiLogger.log(data);
@@ -48,6 +49,7 @@ angular.module('sokisoki')
 
 	$scope.twitterLogin = function() {
 		$scope.signingIn = true;
+		sokiLogger.log('Logging in to twitter');
 		sokiTwitter.login()
 			.then(function(data) {
 				sokiUserUtil.login('twitter', data.id_str, data.screen_name, sokiTwitter.getAccessData(), signInCallback);
