@@ -109,7 +109,7 @@
         <!--<splash src="www/res/screen/ios/Default-Landscape-736h.png" width="2208" height="1242"/>-->
     </platform>
 
-    <gap:splash src="www/res/screen/Default~iphone.png" gap:platform="ios" width="320" height="480"/>
+    <gap:splash src="www/res/screen/iphone.png" gap:platform="ios" width="320" height="480"/>
     <gap:splash src="www/res/screen/Default@2x~iphone.png" gap:platform="ios" width="640" height="960"/>
     <gap:splash src="www/res/screen/Default-Portrait~ipad.png" gap:platform="ios" width="768" height="1024"/>
     <gap:splash src="www/res/screen/Default-Landscape~ipad.png" gap:platform="ios" width="1024" height="768"/>
