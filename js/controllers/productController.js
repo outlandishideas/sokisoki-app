@@ -12,6 +12,10 @@ angular.module('sokisoki')
 	// call base controller
 	$controller('UserController', {$scope: $scope});
 
+	$scope.onSwipeRight = function() {
+		$location.path('/history');
+	};
+
 	$scope.menuState = {
 		title: sokiBarcode.get('brand'),
 		show: false

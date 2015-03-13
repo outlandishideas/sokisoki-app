@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('sokisoki', ['ngTouch', 'ngRoute', 'ngCordova', 'ui.bootstrap'])
+angular.module('sokisoki', ['ngTouch', 'ngRoute', 'ngCordova', 'ui.bootstrap', 'ngAnimate'])
 
 	.value('version', '0.1')
 
