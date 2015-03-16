@@ -76,7 +76,7 @@
 	<!--<gap:plugin name="com.phonegap.plugins.childbrowser" version="5.0.0" />-->
 
 	<!-- generic icon and splash -->
-    <icon src="icon.png" />
+    <!--<icon src="icon.png" />-->
 	<!--<splash src="splash.png" />-->
 
 	<!-- device-specific icons -->
@@ -99,20 +99,20 @@
     <gap:splash src="www/res/screen/ipad_landscape.png" gap:platform="ios" width="1024" height="768"/>
 
     <!-- iPhone / iPod Touch -->
-    <gap:icon gap:platform="ios" src="www/icon-ios-57.png" width="57" height="57" />
-    <gap:icon gap:platform="ios" src="www/icon-ios-57@2x.png" width="114" height="114" />
+    <gap:icon gap:platform="ios" src="www/res/icon/ios/icon-ios-57.png" width="57" height="57" />
+    <gap:icon gap:platform="ios" src="www/res/icon/ios/icon-ios-57@2x.png" width="114" height="114" />
     <!-- iPhone Spotlight and Settings Icon -->
-    <gap:icon gap:platform="ios" src="www/icon-29.png" width="29" height="29" />
-    <gap:icon gap:platform="ios" src="www/icon-29@2x.png" width="58" height="58" />
+    <gap:icon gap:platform="ios" src="www/res/icon/ios/icon-ios-29.png" width="29" height="29" />
+    <gap:icon gap:platform="ios" src="www/res/icon/ios/icon-ios-29@2x.png" width="58" height="58" />
     <!-- iPad -->
-    <gap:icon gap:platform="ios" src="www/icon-ios-72.png" width="72" height="72" />
-    <gap:icon gap:platform="ios" src="www/icon-ios-72@2x.png" width="144" height="144" />
+    <gap:icon gap:platform="ios" src="www/res/icon/ios/icon-ios-72.png" width="72" height="72" />
+    <gap:icon gap:platform="ios" src="www/res/icon/ios/icon-ios-72@2x.png" width="144" height="144" />
     <!-- iPhone / iPod Touch (iOS 7.0+) -->
-    <gap:icon gap:platform="ios" src="www/icon-60.png" width="60" height="60" />
-    <gap:icon gap:platform="ios" src="www/icon-60@2x.png" width="120" height="120" />
+    <gap:icon gap:platform="ios" src="www/res/icon/ios/icon-ios-60.png" width="60" height="60" />
+    <gap:icon gap:platform="ios" src="www/res/icon/ios/icon-ios-60@2x.png" width="120" height="120" />
     <!-- Spotlight Icon (iOS 6.1+) -->
-    <gap:icon gap:platform="ios" src="www/icon-40.png" width="40" height="40" />
-    <gap:icon gap:platform="ios" src="www/icon-40@2x.png" width="80" height="80" />
+    <gap:icon gap:platform="ios" src="www/res/icon/ios/icon-ios-40.png" width="40" height="40" />
+    <gap:icon gap:platform="ios" src="www/res/icon/ios/icon-ios-40@2x.png" width="80" height="80" />
 
     <!--<icon gap:platform="blackberry" src="www/res/icon/blackberry/icon-80.png" />-->
     <!--<icon gap:platform="blackberry" gap:state="hover" src="www/res/icon/blackberry/icon-80.png" />-->
